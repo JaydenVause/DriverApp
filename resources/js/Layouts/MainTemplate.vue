@@ -57,6 +57,11 @@
 	<Footer />
 </template>
 <style>
+	@font-face{
+		font-family: 'Roboto';
+		src: url('/fonts/roboto/Roboto-Regular.ttf');
+	}
+
 
 	.header_nav{
 		z-index: 10;

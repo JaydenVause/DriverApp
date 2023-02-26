@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <Head title="Goodbye" />
+    <Head title="Welcome" />
     <MainTemplate>
     </MainTemplate>
 </template>

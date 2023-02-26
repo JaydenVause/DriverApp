@@ -11,5 +11,5 @@
 	}
 </script>
 <template>
-	<li><Link :href="href" :method="method" type="type">{{name}}</Link></li>
+	<li><Link class=" hover:cursor-pointer" :href="href" :method="method" as="type">{{name}}</Link></li>
 </template>

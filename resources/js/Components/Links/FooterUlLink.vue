@@ -11,5 +11,5 @@
 	}
 </script>
 <template>
-	<li><Link class="text-lg hover:ease-in duration-100 hover:underline hover:text-white hover:cursor-pointer" :href="href" :method="method" as="type">{{name}}</Link></li>
+	<li><Link class="text-lg text-white hover:underline  hover:cursor-pointer" :href="href" :method="method" as="type">{{name}}</Link></li>
 </template>

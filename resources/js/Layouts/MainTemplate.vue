@@ -24,9 +24,15 @@
 						<li>
 							<DesktopHeaderLink href="/" name="Home"/>
 						</li>
+						
+						<li v-if="$page.props.auth.user">
+							<DesktopHeaderLink href="/profile" name="Profile"/>
+						</li>
+
 						<li v-if="$page.props.auth.user">
 							<DesktopHeaderLink href="/logout" method="post" name="Logout"/>
 						</li>
+
 						<li v-if="!$page.props.auth.user">
 							<DesktopHeaderLink href="/login" name="Login"/>
 						</li>
@@ -43,6 +49,7 @@
 				<li><MobileHeaderLink href="/" name="Home"/></li>
 				<div v-if="$page.props.auth.user">
 					<li><MobileHeaderLink href="/logout" method="post" name="Logout"/></li>
+					<li><MobileHeaderLink href="/profile" name="Profile"/></li>
 				</div>
 				<div v-else>
 					<li><MobileHeaderLink href="/login" name="Login"/></li>
@@ -52,7 +59,9 @@
 		</nav>
 	</header>
 		<div class="pt-[70px]">
-			<slot />
+			<div  class="max-w-[1200px] m-auto p-3" >
+				<slot/>
+			</div>
 		</div>
 	<Footer />
 </template>

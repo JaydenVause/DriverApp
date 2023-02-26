@@ -2,6 +2,8 @@
 	import HeaderLogo from '@/Components/Logo/HeaderLogo.vue';
 	import HamburgerMenu from '@/Components/HamburgerMenu.vue';
 	import MobileHeaderLink from '@/Components/Links/MobileHeaderLink.vue';
+	import DesktopHeaderLink from '@/Components/Links/DesktopHeaderLink.vue';
+
 	import Footer from '@/Components/Footer.vue';
 	import { ref } from 'vue';
 
@@ -13,11 +15,30 @@
 </script>
 <template>
 	<header>
-		<div  class="bg-yellow-400 p-4 flex items-center justify-between header_nav">
-			<HeaderLogo />
-			<HamburgerMenu @click="toggleMobileNav" />
+		<div  class="bg-yellow-400 header_nav">
+			<div class=" p-4 flex items-center justify-between max-w-[1200px] m-auto h-[70px]">
+				<HeaderLogo />
+				<HamburgerMenu class="md:hidden" @click="toggleMobileNav" />
+				<nav class="hidden md:flex">
+					<ul class="flex gap-3">
+						<li>
+							<DesktopHeaderLink href="/" name="Home"/>
+						</li>
+						<li v-if="$page.props.auth.user">
+							<DesktopHeaderLink href="/logout" method="post" name="Logout"/>
+						</li>
+						<li v-if="!$page.props.auth.user">
+							<DesktopHeaderLink href="/login" name="Login"/>
+						</li>
+						<li v-if="!$page.props.auth.user">
+							<DesktopHeaderLink href="/register" name="Register"/>
+						</li>
+					</ul>
+				</nav>
+			</div>
 		</div>
-		<nav :class="mobileNavOpen ? 'show-mobile-nav' : 'hidden-mobile-nav'">
+		<!--mobile_navigation_menu-->
+		<nav :class="mobileNavOpen ? 'show-mobile-nav sm:hidden' : 'hidden-mobile-nav'">
 			<ul>
 				<li><MobileHeaderLink href="/" name="Home"/></li>
 				<div v-if="$page.props.auth.user">
@@ -39,9 +60,8 @@
 
 	.header_nav{
 		z-index: 10;
-		position: absolute;
+		position: fixed;
 		width: 100%;
-		height: 70px;
 	}
 	.hidden-mobile-nav{
 		position: absolute;
@@ -60,5 +80,9 @@
 		transform: translateY(70px);
 		z-index: 2;
 		background-color: white;
+	}
+
+	h1, h2, h3, h4, h5, h6, a, p{
+		font-family: 'Roboto'
 	}
 </style>

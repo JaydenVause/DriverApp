@@ -3,7 +3,7 @@
 
 	export default{
 
-		props: ['href', 'name'],
+		props: ['href', 'name', 'method', 'type'],
 
 		components: {
 			Link
@@ -11,5 +11,5 @@
 	}
 </script>
 <template>
-	<li><Link :href="href">{{name}}</Link></li>
+	<li><Link :href="href" :method="method" type="type">{{name}}</Link></li>
 </template>

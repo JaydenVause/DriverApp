@@ -12,7 +12,14 @@
 		</div>
 		<nav class="p-4">
 			<ul>
-				<MobileHeaderLink href="/" name="Home"/>
+				<li><MobileHeaderLink href="/" name="Home"/></li>
+				<div v-if="$page.props.auth.user">
+					<li><MobileHeaderLink href="/logout" method="post" name="Logout"/></li>
+				</div>
+				<div v-else>
+					<li><MobileHeaderLink href="/login" name="Login"/></li>
+					<li><MobileHeaderLink href="/register" name="Register"/></li>
+				</div>
 			</ul>
 		</nav>
 	</header>

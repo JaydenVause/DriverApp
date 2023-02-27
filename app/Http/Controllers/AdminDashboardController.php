@@ -10,6 +10,9 @@ use Inertia\Inertia;
 
 class AdminDashboardController extends Controller
 {
+    /**
+     * admin dashboard page
+     */
     public function index(){
 
         $user = Auth::user();

@@ -11,11 +11,17 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class RegisterDrivingInstructorController extends Controller
-{
+{   
+    /**
+     * register as driving instructor page
+     */
     public function register(){
         return Inertia::render('DrivingInstructor/Register');
     }
 
+    /**
+     * process users driving instructor registration
+     */
     public function process(Request $request){
 
         $user = Auth::user();

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+// use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\DrivingInstructorRegistration;
 
 
-class InstructorTest extends TestCase
+class InstructorRegistrationTest extends TestCase
 {
     /**
      * testing that a user can access driving instructor registration page
@@ -102,7 +102,7 @@ class InstructorTest extends TestCase
     /**
      * tests user is registered user to register as driving instructor
      */
-    public function test_user_must_be_registered_as_user(){
+    public function test_user_must_user_register_driving_instructor(){
         $medical = UploadedFile::fake()->image('medical.png')->size(20000);
 
         $data = [
@@ -120,5 +120,27 @@ class InstructorTest extends TestCase
         $response = $this->post('/register/driving-instructor', $data);
 
         $response->assertStatus(302);
+    }
+
+    /**
+     * tests driving instructor is registered after approved
+     */
+    public function test_instructor_registered_after_approved(){
+        $instructor = User::factory()->create();
+
+        $registration = DrivingInstructorRegistration::factory()->for($instructor)->create();
+
+        $admin = User::factory()->admin()->create();
+
+        print_r("HELLO WORLD");
+
+
+
+        $this->actingAs($admin)->post('/admin/approve-instructors/'.$registration->id);
+
+        $this->assertDatabaseHas('driving_instructors', [
+            'user_id' => $instructor->id
+        ]);
+
     }
 }

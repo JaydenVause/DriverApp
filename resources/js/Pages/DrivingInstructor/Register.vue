@@ -21,13 +21,13 @@
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="Register Driving Instructor" />
     <MainTemplate>
         <h1 class="text-2xl font-extrabold">Register as driving instructor</h1>
         <form class="flex flex-col gap-1" @submit.prevent="submit">
             <label for="date_of_birth">Date of birth</label><br/>
             <span>
-                <input type="date" class="max-w-[100px]"  name="date_of_birth" v-model="form.date_of_birth" /><br/>
+                <input type="date" class="max-w-[300px]"  name="date_of_birth" v-model="form.date_of_birth" /><br/>
             </span>
             <p v-if="form.errors.date_of_birth">{{form.errors.date_of_birth}}</p>
 

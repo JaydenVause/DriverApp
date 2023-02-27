@@ -1,64 +1,14 @@
 <script setup>
-	import HeaderLogo from '@/Components/Logo/HeaderLogo.vue';
-	import HamburgerMenu from '@/Components/HamburgerMenu.vue';
-	import MobileHeaderLink from '@/Components/Links/MobileHeaderLink.vue';
-	import DesktopHeaderLink from '@/Components/Links/DesktopHeaderLink.vue';
 
+
+	import Header from '@/Components/Header.vue';
 	import Footer from '@/Components/Footer.vue';
-	import { ref } from 'vue';
 
-	let mobileNavOpen = ref(false);
-
-	let toggleMobileNav = function(){
-		mobileNavOpen.value = !mobileNavOpen.value
-	};
 </script>
 <template>
-	<header>
-		<div  class="bg-yellow-400 header_nav">
-			<div class=" p-4 flex items-center justify-between max-w-[1200px] m-auto h-[70px]">
-				<HeaderLogo />
-				<HamburgerMenu class="md:hidden" @click="toggleMobileNav" />
-				<nav class="hidden md:flex">
-					<ul class="flex gap-3">
-						<li>
-							<DesktopHeaderLink href="/" name="Home"/>
-						</li>
-						
-						<li v-if="$page.props.auth.user">
-							<DesktopHeaderLink href="/profile" name="Profile"/>
-						</li>
-
-						<li v-if="$page.props.auth.user">
-							<DesktopHeaderLink href="/logout" method="post" name="Logout"/>
-						</li>
-
-						<li v-if="!$page.props.auth.user">
-							<DesktopHeaderLink href="/login" name="Login"/>
-						</li>
-						<li v-if="!$page.props.auth.user">
-							<DesktopHeaderLink href="/register" name="Register"/>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-		<!--mobile_navigation_menu-->
-		<nav :class="mobileNavOpen ? 'show-mobile-nav sm:hidden' : 'hidden-mobile-nav'">
-			<ul>
-				<li><MobileHeaderLink href="/" name="Home"/></li>
-				<div v-if="$page.props.auth.user">
-					<li><MobileHeaderLink href="/logout" method="post" name="Logout"/></li>
-					<li><MobileHeaderLink href="/profile" name="Profile"/></li>
-				</div>
-				<div v-else>
-					<li><MobileHeaderLink href="/login" name="Login"/></li>
-					<li><MobileHeaderLink href="/register" name="Register"/></li>
-				</div>
-			</ul>
-		</nav>
-	</header>
+	<Header />
 		<div class="pt-[70px]">
+			<slot name="super" />
 			<div  class="max-w-[1200px] m-auto p-3" >
 				<slot/>
 			</div>
@@ -88,7 +38,7 @@
 
 	.show-mobile-nav{
 
-		position: absolute;
+		position: fixed;
 		width: 100%;
 		transition: all 0.3s ease-in-out;
 		transform: translateY(70px);

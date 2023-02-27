@@ -10,11 +10,13 @@ use Illuminate\Http\UploadedFile;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use App\Models\DrivingInstructorRegistration;
+
 
 class InstructorTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * testing that a user can access driving instructor registration page
      */
     public function test_register_instructor_page(){
         $user = User::factory()->create();
@@ -25,6 +27,19 @@ class InstructorTest extends TestCase
 
     }
 
+    /**
+     * tests must be a user to access instructor registration page
+     */
+    public function test_user_registered_access_instructor_page(){
+        $response = $this->get('/register/driving-instructor');
+
+        $response->assertStatus(302);
+    }
+
+
+    /**
+     * tests user can register to be a driving instructor
+     */
     public function test_user_can_register_as_driving_instructor(){
         $user = User::factory()->create();
 
@@ -59,5 +74,51 @@ class InstructorTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertSee('Registration successful!');
+    }
+
+    /**
+     * tests user cannot submit multiple attempts to be driving instructor
+     */
+    public function test_cant_register_twice_driving_instructor(){
+        $user = User::factory()->has(DrivingInstructorRegistration::factory())->create();
+
+        $medical = UploadedFile::fake()->image('medical.png')->size(20000);
+
+        $data = [
+            'date_of_birth' => '1996-01-17',
+            'drivers_license_number' => '2938 2324 2324 2342',
+            'country' => '1',
+            'wwcc' => '283229384', 
+            'medical' => $medical,
+            'tandc' => true
+        ];
+
+
+        $date_of_birth =  $data['date_of_birth'];
+        $response = $this->actingAs($user)->post('/register/driving-instructor', $data);
+        $response->assertStatus(403);
+    }
+
+    /**
+     * tests user is registered user to register as driving instructor
+     */
+    public function test_user_must_be_registered_as_user(){
+        $medical = UploadedFile::fake()->image('medical.png')->size(20000);
+
+        $data = [
+            'date_of_birth' => '1996-01-17',
+            'drivers_license_number' => '2938 2324 2324 2342',
+            'country' => '1',
+            'wwcc' => '283229384', 
+            'medical' => $medical,
+            'tandc' => true
+        ];
+
+
+        $date_of_birth =  $data['date_of_birth'];
+        
+        $response = $this->post('/register/driving-instructor', $data);
+
+        $response->assertStatus(302);
     }
 }

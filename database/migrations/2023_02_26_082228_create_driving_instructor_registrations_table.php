@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('wwcc');
             $table->string('medical');
             $table->boolean('tandc');
+            $table->boolean('approved')->default(false);
             $table->timestamps();
 
             // 'user_id' => $user->id,

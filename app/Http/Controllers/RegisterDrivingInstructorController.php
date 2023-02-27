@@ -18,6 +18,12 @@ class RegisterDrivingInstructorController extends Controller
 
     public function process(Request $request){
 
+        $user = Auth::user();
+
+        if(count($user->DrivingInstructorRegistration()->get()) >= 1){
+            return abort(403);
+        }
+
         $validated = $request->validate([
             'date_of_birth' => 'required|date_format:Y-m-d',
             'drivers_license_number' => 'required|string|max:255',

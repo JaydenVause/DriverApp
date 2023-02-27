@@ -20,7 +20,7 @@
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="Success" />
     <MainTemplate>
         <h1 class="text-2xl font-extrabold">Thankyou!</h1>
         <p>Successfully recieved your registration to be a driving instructor</p>

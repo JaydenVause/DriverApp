@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\RegisterDrivingInstructorController;
-
-
+use App\Http\Controllers\ApproveInstructorsController;
+use App\Http\Controllers\SecureFileDownloadController;
+use App\Http\Controllers\AdminDashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,11 +33,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/register/driving-instructor', [RegisterDrivingInstructorController::class, 'process']);
+    Route::get('/register/driving-instructor', [RegisterDrivingInstructorController::class, 'register']);
+    Route::get('/admin', [AdminDashboardController::class, 'index']);
+    Route::get('/admin/approve-instructors', [ApproveInstructorsController::class, 'index']);
+    Route::get('/secure-store/{file_name}', [SecureFileDownloadController::class, 'download']);
 });
 
-Route::get('/register/driving-instructor', [RegisterDrivingInstructorController::class, 'register']);
+Route::post('/admin/approve-instructors/{registration_id}', [ApproveInstructorsController::class, 'approve']);
 
-Route::post('/register/driving-instructor', [RegisterDrivingInstructorController::class, 'process']);
+
+
+
+
+
+
+
 
 
 

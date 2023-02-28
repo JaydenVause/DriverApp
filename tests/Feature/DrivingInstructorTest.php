@@ -32,9 +32,7 @@ class DrivingInstructorTest extends TestCase
 
             'areas_driving' => [
                 [
-                    'name' => 'Collingwood',
-                    'postcode' => '3066',
-                    'state' => 'VIC'
+                    'id' => 1
                 ]
             ],
         ];

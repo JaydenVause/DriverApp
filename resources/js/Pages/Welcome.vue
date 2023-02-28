@@ -14,17 +14,17 @@
             </div>
         </template>
         <div class="flex flex-col gap-3">
-            <div class="bg-gray-700 text-white p-6">
+            <div class="bg-gray-800 text-white p-6">
                 <h2 class="text-2xl text-center underline">Fast</h2>
                 <p class='text-lg text-center'>Fast access to the best local driving instructors available</p>
             </div>
 
-            <div class="bg-gray-700 text-white p-6">
+            <div class="bg-gray-800 text-white p-6">
                 <h2 class="text-2xl text-center underline">Safe</h2>
                 <p class='text-lg text-center'>All driving instructors are vetted and verified</p>
             </div>
 
-            <div class="bg-gray-700 text-white p-6">
+            <div class="bg-gray-800 text-white p-6">
                 <h2 class="text-2xl text-center underline">Quality</h2>
                 <p class='text-lg text-center'>Upon selecting instructors you can check reviews from prior students allowing you to scope them out for yourself</p>
             </div>            

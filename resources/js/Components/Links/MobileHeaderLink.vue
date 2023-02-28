@@ -11,5 +11,5 @@
 	}
 </script>
 <template>
-	<Link class=" hover:cursor-pointer" :href="href" :method="method" as="type">{{name}}</Link>
+	<li class="bg-gray-900 p-3 text-white hover:cursor-pointer hover:bg-white hover:text-black"><Link :href="href" :method="method" as="type">{{name}}</Link></li>
 </template>

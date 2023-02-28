@@ -41,4 +41,10 @@ class UserFactory extends Factory
             'admin' => true,
         ]);
     }
+
+    public function driving_instructor(){
+        return $this->state(fn (array $attributes) =>[
+            'driving_instructor' => true
+        ]);
+    }
 }

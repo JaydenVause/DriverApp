@@ -2,7 +2,7 @@
 	import FooterUlLink from '@/Components/Links/FooterUlLink.vue';
 </script>
 <template>
-	<footer class="bg-gray-700 p-4">
+	<footer class="bg-gray-900 p-4">
 		<div>
 			<ul>
 				<li><FooterUlLink href="/admin" name="Access admin dashboard" /></li>

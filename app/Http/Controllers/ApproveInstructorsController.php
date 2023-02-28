@@ -37,12 +37,15 @@ class ApproveInstructorsController extends Controller
      */
     public function approve($registration_id){
         $registration = DrivingInstructorRegistration::where('id', $registration_id)->first();
+        
         $registration->approved = true;
+        
+        $user = $registration->user;
 
-        DrivingInstructor::create([
-            'user_id' => $registration->user->id
-        ]);
+        $user->driving_instructor = true;
 
         $registration->save();
+
+        $user->save();
     }
 }

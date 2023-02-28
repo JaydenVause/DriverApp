@@ -27,6 +27,9 @@
 							<DesktopHeaderLink href="/profile" name="Profile"/>
 						</li>
 
+						<li v-if="$page.props.auth.user"><DesktopHeaderLink href="/admin" name="Access admin dashboard" /></li>
+						<li v-if="$page.props.auth.user"><DesktopHeaderLink href="/register/driving-instructor" name="Register as driving instructor" /></li>
+
 						<li v-if="$page.props.auth.user">
 							<DesktopHeaderLink href="/logout" method="post" name="Logout"/>
 						</li>
@@ -46,8 +49,10 @@
 			<ul>
 				<li><MobileHeaderLink href="/" name="Home"/></li>
 				<div v-if="$page.props.auth.user">
-					<li><MobileHeaderLink href="/profile" name="Profile"/></li>
-					<li><MobileHeaderLink href="/logout" method="post" name="Logout"/></li>
+					<MobileHeaderLink href="/profile" name="Profile"/>
+					<MobileHeaderLink href="/logout" method="post" name="Logout"/>
+					<MobileHeaderLink href="/admin" name="Access admin dashboard" />
+					<MobileHeaderLink href="/register/driving-instructor" name="Register as driving instructor" />
 				</div>
 				<div v-else>
 					<li><MobileHeaderLink href="/login" name="Login"/></li>

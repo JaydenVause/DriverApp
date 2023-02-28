@@ -100,7 +100,7 @@ class InstructorRegistrationTest extends TestCase
     }
 
     /**
-     * tests user is registered user to register as driving instructor
+     * tests user registration as driving instructor
      */
     public function test_user_must_user_register_driving_instructor(){
         $medical = UploadedFile::fake()->image('medical.png')->size(20000);
@@ -119,6 +119,15 @@ class InstructorRegistrationTest extends TestCase
         
         $response = $this->post('/register/driving-instructor', $data);
 
+
+        $this->assertDatabaseHas('driving_instructor_registrations', [
+            'date_of_birth' => $data['date_of_birth'],
+            'drivers_license_number' => $data['drivers_license_number'],
+            'country_id' => $data['country'],
+            'wwcc' => $data['wwcc'],
+            'tandc' => $data['tandc']
+        ]);
+
         $response->assertStatus(302);
     }
 
@@ -132,14 +141,13 @@ class InstructorRegistrationTest extends TestCase
 
         $admin = User::factory()->admin()->create();
 
-        print_r("HELLO WORLD");
-
-
+        print 'WORKING';
 
         $this->actingAs($admin)->post('/admin/approve-instructors/'.$registration->id);
 
-        $this->assertDatabaseHas('driving_instructors', [
-            'user_id' => $instructor->id
+        $this->assertDatabaseHas('users', [
+            'id' => $instructor->id,
+            'driving_instructor' => true
         ]);
 
     }

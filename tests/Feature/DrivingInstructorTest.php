@@ -6,14 +6,18 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\LocationData;
 
 class DrivingInstructorTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * Tests instructor can add areas they offer lessons to
      */
     public function test_driving_instructor_manage_profile(){
         #schedule of days of week that instructor is driving
+
+        $location = LocationData::factory()->create();
         $data = [
             'days_times_driving' => [
                 'monday' => [
@@ -32,7 +36,7 @@ class DrivingInstructorTest extends TestCase
 
             'areas_driving' => [
                 [
-                    'id' => 1
+                    'id' => $location->id
                 ]
             ],
         ];
@@ -41,11 +45,12 @@ class DrivingInstructorTest extends TestCase
 
         $this->actingAs($instructor)->patch('/instructor/update-profile', $data);
 
-        $this->assertDatabaseHas('area_data_driving_instructor', [
+        $this->assertDatabaseHas('location_data_driving_instructor', [
             'instructor_id' => $instructor->id,
+            'location_data_id' => $data['areas_driving'][0]['id']
         ]);
 
-        $this->assertDatabaseHas('days_times_driving_driving_instructor', 
+        $this->assertDatabaseHas('days_times_driving_driving_instructors', 
             [
                 'monday_from' => $data['days_times_driving']['monday']['from'],
                 'monday_to' => $data['days_times_driving']['monday']['to'],

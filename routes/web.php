@@ -9,6 +9,8 @@ use App\Http\Controllers\RegisterDrivingInstructorController;
 use App\Http\Controllers\ApproveInstructorsController;
 use App\Http\Controllers\SecureFileDownloadController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\UpdateDrivingInstructorTimetableController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +43,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/admin/approve-instructors/{registration_id}', [ApproveInstructorsController::class, 'approve']);
-
+Route::patch('/instructor/update-profile', [UpdateDrivingInstructorTimetableController::class, 'patch']);
 
 
 

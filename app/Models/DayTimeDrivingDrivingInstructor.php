@@ -14,7 +14,6 @@ class DayTimeDrivingDrivingInstructor extends Model
 
     protected $fillable = [
         'instructor_id',
-        'location_data_id'
     ];
 
 

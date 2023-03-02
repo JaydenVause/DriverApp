@@ -10,6 +10,7 @@ use App\Http\Controllers\ApproveInstructorsController;
 use App\Http\Controllers\SecureFileDownloadController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\UpdateDrivingInstructorTimetableController;
+use App\Http\Controllers\SearchLocationDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,12 +41,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminDashboardController::class, 'index']);
     Route::get('/admin/approve-instructors', [ApproveInstructorsController::class, 'index']);
     Route::get('/secure-store/{file_name}', [SecureFileDownloadController::class, 'download']);
+    Route::post('/admin/approve-instructors/{registration_id}', [ApproveInstructorsController::class, 'approve']);
+    Route::get('/instructor/update-profile', [UpdateDrivingInstructorTimetableController::class, 'index']);
+    Route::patch('/instructor/update-profile', [UpdateDrivingInstructorTimetableController::class, 'patch']);
 });
 
-Route::post('/admin/approve-instructors/{registration_id}', [ApproveInstructorsController::class, 'approve']);
-Route::patch('/instructor/update-profile', [UpdateDrivingInstructorTimetableController::class, 'patch']);
 
 
+Route::get('/search/location-data', [SearchLocationDataController::class, 'search']);
 
 
 

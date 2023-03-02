@@ -117,4 +117,20 @@ class AdminTest extends TestCase
         ]);
     }
 
+    public function test_must_be_logged_in_approve_instructor(){
+        
+
+        $response = $this->post('/admin/approve-instructors/0231');
+
+        $response->assertStatus(302);
+    }
+
+    public function test_must_be_admin_approve_instructor(){
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post('/admin/approve-instructors/0231');
+
+        $response->assertStatus(403);
+    }
+
 }

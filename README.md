@@ -19,6 +19,11 @@ that the innerworkings and backend functionality going on here is relatively in 
 * TailwindCSS
 * MySQL
 
+## 3rd party data used
+
+* https://www.matthewproctor.com/australian_postcodes (for postcode data in australia populate database)
+
+
 ## Final notes
 
 Thankyou for checking it out, all the best !

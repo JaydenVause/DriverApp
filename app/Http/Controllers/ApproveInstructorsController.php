@@ -36,6 +36,13 @@ class ApproveInstructorsController extends Controller
      * approve a registration
      */
     public function approve($registration_id){
+
+        $user = Auth::user();
+        
+        if(!Gate::allows('access-secure-file', $user)){
+            return abort(403);
+        }
+
         $registration = DrivingInstructorRegistration::where('id', $registration_id)->first();
         
         $registration->approved = true;

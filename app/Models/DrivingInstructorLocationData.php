@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DrivingInstructorLocationData extends Model
 {
@@ -15,4 +16,12 @@ class DrivingInstructorLocationData extends Model
         'instructor_id',
         'location_data_id'
     ];
+
+    public function user(){
+        return $this->BelongsTo(User::class, 'instructor_id');
+    }
+
+    public function locationData(){
+        return $this->BelongsTo(LocationData::class, 'location_data_id');
+    }
 }

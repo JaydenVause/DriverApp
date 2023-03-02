@@ -17,7 +17,12 @@ class DayTimeDrivingDrivingInstructorFactory extends Factory
     public function definition(): array
     {
         return [
-            
+            "monday_from" => '02:00',
+            "monday_to" => '04:30',
+            "tuesday_from" => '08:00',
+            "tuesday_to" => '12:30',
+            "friday_from" => '03:30',
+            "friday_to" => '06:30'
         ];
     }
 }

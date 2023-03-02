@@ -7,6 +7,8 @@
 			<ul>
 				<li><FooterUlLink href="/admin" name="Access admin dashboard" /></li>
 				<li><FooterUlLink href="/register/driving-instructor" name="Register as driving instructor" /></li>
+				<li><FooterUlLink href="/instructor/update-profile" name="Update your instructor profile" /></li>
+				
 			</ul>
 		</div>
 		<p class="text-white text-center">Page created by Jayden Vause 2023 &#169;</p>

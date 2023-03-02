@@ -25,5 +25,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('access-secure-file', function (User $user){
             return $user->admin == true;
         });
+
+        Gate::define('access-driving-instructor', function (User $user){
+            return $user->driving_instructor == true;
+        });
     }
 }

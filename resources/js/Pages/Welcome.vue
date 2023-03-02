@@ -7,27 +7,44 @@
     <Head title="Welcome" />
     <MainTemplate>
         <template #super>
-            <div class="bg-gray-800 text-white left-0 p-3">
-                <h1 class="text-4xl">Find the best local driving instructor now!</h1>
-                <input class="m-auto block rounded-full text-black w-full" type="text" name="postcode" placeholder="Enter postcode or suburb" />
-                <button class="block m-auto p-3 bg-yellow-500 text-black mt-3">Find Instructor</button>
+            <div class=" dark-gradient">
+                <div class="p-3 flex justify-center ">
+                    <div class="items-end flex flex-col p-3">
+                        <h1 class="text-white text-[3.3em] font-extrabold md:text-[3em]">Find the best local driving instructor now!</h1>
+                        <img alt="L, P & P2 icon" src="/imgs/gip2.png" class="w-[250px] self-end"/>
+                    </div>
+                    
+                </div>
+                <div class="bg-white p-3 flex justify-center">
+                    <div class="flex flex-col max-w-[900px] w-full gap-3 h-full md:justify-center">
+                        <label class=" underline text-lg">Search for a driving instructor</label>
+                        <input type="text" name="postcode" placeholder="Enter postcode or suburb" class="p-4 rounded " />
+                    </div>
+                </div>
             </div>
         </template>
-        <div class="flex flex-col gap-3">
-            <div class="bg-gray-800 text-white p-6">
+        <div class="flex gap-3 flex-wrap justify-center">
+            <div class="bg-white text-black shadow-xl p-6 max-w-[300px]">
                 <h2 class="text-2xl text-center underline">Fast</h2>
                 <p class='text-lg text-center'>Fast access to the best local driving instructors available</p>
             </div>
 
-            <div class="bg-gray-800 text-white p-6">
+            <div class="bg-white text-black shadow-xl p-6 max-w-[300px]">
                 <h2 class="text-2xl text-center underline">Safe</h2>
                 <p class='text-lg text-center'>All driving instructors are vetted and verified</p>
             </div>
 
-            <div class="bg-gray-800 text-white p-6">
+            <div class="bg-white text-black shadow-xl p-6 max-w-[300px]">
                 <h2 class="text-2xl text-center underline">Quality</h2>
-                <p class='text-lg text-center'>Upon selecting instructors you can check reviews from prior students allowing you to scope them out for yourself</p>
+                <p class='text-lg text-center'>Checkout instructors before you drive!</p>
             </div>            
         </div>
     </MainTemplate>
 </template>
+
+<style>
+    .dark-gradient{
+         background: rgb(32,32,32);
+        background: linear-gradient(120deg, rgba(32,32,32,1) 0%, rgba(71,71,69,1) 100%); 
+    }
+</style>

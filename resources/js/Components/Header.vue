@@ -13,7 +13,7 @@
 </script>
 <template>
 	<header>
-		<div  class="bg-yellow-400 header_nav">
+		<div  class="yellow-gradient header_nav">
 			<div class=" p-4 flex items-center justify-between max-w-[1200px] m-auto h-[70px]">
 				<HeaderLogo />
 				<HamburgerMenu class="md:hidden" @click="toggleMobileNav" />
@@ -25,6 +25,10 @@
 						
 						<li v-if="$page.props.auth.user">
 							<DesktopHeaderLink href="/profile" name="Profile"/>
+						</li>
+
+						<li v-if="$page.props.auth.user">
+							<DesktopHeaderLink href="/instructor/update-profile" name="Update your instructor profile" />
 						</li>
 
 						<li v-if="$page.props.auth.user"><DesktopHeaderLink href="/admin" name="Access admin dashboard" /></li>
@@ -53,6 +57,7 @@
 					<MobileHeaderLink href="/logout" method="post" name="Logout"/>
 					<MobileHeaderLink href="/admin" name="Access admin dashboard" />
 					<MobileHeaderLink href="/register/driving-instructor" name="Register as driving instructor" />
+					<MobileHeaderLink href="/instructor/update-profile" name="Update your instructor profile" />
 				</div>
 				<div v-else>
 					<li><MobileHeaderLink href="/login" name="Login"/></li>
@@ -62,3 +67,11 @@
 		</nav>
 	</header>
 </template>
+<style>
+	.yellow-gradient{
+		 background: rgb(255,207,0);
+		background: linear-gradient(120deg, rgba(255,207,0,1) 0%, rgba(255,246,9,1) 100%); 
+	}
+
+	
+</style>

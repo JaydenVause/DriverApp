@@ -2,11 +2,16 @@
 	import { useForm } from '@inertiajs/vue3'
 	import {reactive} from 'vue';
     import { usePage } from '@inertiajs/vue3'
+    import AreaButtons from '@/Components/Forms/Parts/AreaButtons.vue';
+    import SelectAreaForm from '@/Components/Forms/Parts/SelectAreaForm.vue';
+
+    //format times propperly
 	function format_loaded_time(time){
 	    time = time.split(':');
 	    return time[0].padStart(2, '0') + ':' + time[1].padEnd(2, '0');
 	}
 
+	// get previous driving day times data from props
 	function load_previous_driving_data(){
 	    let days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 	    let data = {
@@ -29,6 +34,7 @@
 	    return data;
 	}
 
+	// load previous driving location data from props
 	function load_previous_driving_locations(){
 	    let page = usePage();
 	    let loaded_data = {};
@@ -39,12 +45,13 @@
 	}
 
 
-
+	//form data
 	const form = useForm({
 	    days_times_driving: load_previous_driving_data(),
 	    areas_driving: load_previous_driving_locations(),
 	});
 
+	// turn day on and off
 	let toggleDay = function ( day ){
 	    console.log(day);
 	    
@@ -77,42 +84,21 @@
 	    return hour + ':' + minute;
 	}
 
+	// format error string correctly
 	function getErrorString(day, action){
 	    return 'days_times_driving.' + day + '.'+action;
 	}
 
-	// driving locations input
 
-	const driving_locations = reactive({
-	    search_val: null
-	});
-
-	const locationsFound = reactive({
-	    values: null
-	});
-
-	//handles search for areas
-
-	function search_for_driving_locations(event){  
-	    if(driving_locations.searchVal){
-	        axios.get('/search/location-data?query='+driving_locations.searchVal)
-	        .then(function(response){
-	            locationsFound.values = response.data
-	        });
-	    }else{
-	        locationsFound.values = null;
-	    }
-	}
 
 	// handling adding locations to form
+	function addLocation(location){
 
-	function logLocation(location){
-	    driving_locations.search_val = null;
-	    locationsFound.values = null;
 	    form.areas_driving[location.id] = location;
-	    console.log(location);
+
 	}
 
+	// delete driving location from data
 	function deleteLocation(location_id){
 	    delete form.areas_driving[location_id];
 	}
@@ -150,7 +136,6 @@
                                     </template>
                                 </select>
                             </td>
-                            
                         </tr>
                         <!-- errors -->
                         <tr>
@@ -164,33 +149,19 @@
                                 {{form.errors['days_times_driving.'+day]}}
                             </p>
                         </tr>
-                        
                     </template>
-
                 </table>
+
                 <p class="error" v-if="form.errors.days_times_driving">
                     {{form.errors.days_times_driving}}
                 </p>
                 <!-- areas -->
-                <label>Select areas you are available to drive</label>
-                <input @input="search_for_driving_locations" class="rounded-full" type="text" placeholder="Enter postcode or suburb" v-model="driving_locations.searchVal" />
+                <SelectAreaForm @logLocation="addLocation">
+                	<label>Select areas you are available to drive</label>
+                </SelectAreaForm>
 
-                <ul class="bg-[#e1e4e8]">
-                    <template v-for="location in locationsFound.values">
-                        <li class="p-3 hover:bg-gray-700 hover:text-white hover:cursor-pointer" @click="logLocation(location)">
-                            {{location.postcode}}, {{location.suburb}}, {{location.state}}
-                        </li>
-                    </template>
-                </ul>
-                <ul>
-                   <template v-for="location in form.areas_driving">
-                        <div class="flex justify-between p-3 shadow">
-                                <p class="flex-1">{{location.postcode}}, {{location.suburb}}, {{location.state}}</p>                            
-                                <button class="flex-2 font-extrabold text-2xl" @click.prevent="deleteLocation(location.id)">x</button>
-                            
-                        </div>
-                   </template> 
-                </ul>
+                <AreaButtons :areasDriving="form.areas_driving" @deleteAreaDriving="deleteLocation" />
+                
 
                 <p class="error" v-if="form.errors.areas_driving">
                     {{form.errors.areas_driving}}

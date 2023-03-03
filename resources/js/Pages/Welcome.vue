@@ -1,26 +1,30 @@
 <script setup>
     import MainTemplate from '@/Layouts/MainTemplate.vue';
     import { Head } from '@inertiajs/vue3';
+    import SelectAreaForm from '@/Components/Forms/Parts/SelectAreaForm.vue';
+
+    function searchForDriversInArea(location){
+        console.log(location.id);
+    }
 </script>
 
 <template>
     <Head title="Welcome" />
     <MainTemplate>
         <template #super>
-            <div class=" dark-gradient">
-                <div class="p-3 flex justify-center ">
-                    <div class="items-end flex flex-col p-3">
+            <div class=" dark-gradient ">
+                <div class="p-3 flex flex-col justify-center max-w-[1200px] m-auto ">
+                    <div class="flex flex-col p-3">
                         <h1 class="text-white text-[3.3em] font-extrabold md:text-[3em]">Find the best local driving instructor now!</h1>
                         <img alt="L, P & P2 icon" src="/imgs/gip2.png" class="w-[250px] self-end"/>
                     </div>
-                    
-                </div>
-                <div class="bg-white p-3 flex justify-center">
-                    <div class="flex flex-col max-w-[900px] w-full gap-3 h-full md:justify-center">
-                        <label class=" underline text-lg">Search for a driving instructor</label>
-                        <input type="text" name="postcode" placeholder="Enter postcode or suburb" class="p-4 rounded " />
+                    <div class="flex justify-center">
+                        <div class="flex flex-col w-full gap-3 h-full md:justify-center max-w-[1000px]">
+                            <SelectAreaForm @logLocation="searchForDriversInArea" />
+                        </div>
                     </div>
                 </div>
+                
             </div>
         </template>
         <div class="flex gap-3 flex-wrap justify-center">

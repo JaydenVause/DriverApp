@@ -1,10 +1,13 @@
 <script setup>
     import MainTemplate from '@/Layouts/MainTemplate.vue';
-    import { Head } from '@inertiajs/vue3';
+    import { Head , useForm, router} from '@inertiajs/vue3';
     import SelectAreaForm from '@/Components/Forms/Parts/SelectAreaForm.vue';
+
 
     function searchForDriversInArea(location){
         console.log(location.id);
+
+        router.get('/driving-instructors?query='+location.id);
     }
 </script>
 
@@ -13,15 +16,10 @@
     <MainTemplate>
         <template #super>
             <div class=" dark-gradient ">
-                <div class="p-3 flex flex-col justify-center max-w-[1200px] m-auto ">
-                    <div class="flex flex-col p-3">
+                <div class="dark-gradient">
+                    <div class="  p-10 max-w-[1200px] m-auto">
                         <h1 class="text-white text-[3.3em] font-extrabold md:text-[3em]">Find the best local driving instructor now!</h1>
-                        <img alt="L, P & P2 icon" src="/imgs/gip2.png" class="w-[250px] self-end"/>
-                    </div>
-                    <div class="flex justify-center">
-                        <div class="flex flex-col w-full gap-3 h-full md:justify-center max-w-[1000px]">
-                            <SelectAreaForm @logLocation="searchForDriversInArea" />
-                        </div>
+                        <SelectAreaForm @logLocation="searchForDriversInArea" />
                     </div>
                 </div>
                 

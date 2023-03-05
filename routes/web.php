@@ -11,7 +11,7 @@ use App\Http\Controllers\SecureFileDownloadController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\UpdateDrivingInstructorTimetableController;
 use App\Http\Controllers\SearchLocationDataController;
-
+use App\Http\Controllers\SearchForDrivingInstructorsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/search/location-data', [SearchLocationDataController::class, 'search']);
 
-
+Route::get('/driving-instructors', [SearchForDrivingInstructorsController::class, 'find']);
 
 
 

@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -47,5 +48,16 @@ class User extends Authenticatable
     public function drivingInstructorRegistration(): HasOne
     {
         return $this->hasOne(DrivingInstructorRegistration::class);
+    }
+
+    public function locationDatas(): BelongsToMany
+    {
+        return $this
+        ->belongsToMany(
+            LocationData::class,
+             'location_data_driving_instructor', 
+             'instructor_id', 
+             'location_data_id'
+         );
     }
 }

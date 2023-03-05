@@ -38,7 +38,7 @@
 	}
 </script>
 <template>
-	<input @input="searchForDrivingLocations" class="rounded-full p-3" type="text" placeholder="Enter postcode or suburb" v-model="searchVal" />
+	<input @input="searchForDrivingLocations" class="rounded-full p-3 w-full" type="text" placeholder="Enter postcode or suburb" v-model="searchVal" />
     <ul class="bg-[#e1e4e8] overflow-auto max-h-[300px]" >
         <template v-for="location in locationsFound">
             <li class="p-3 hover:bg-gray-700 hover:text-white hover:cursor-pointer" @click="emitLocation(location)">

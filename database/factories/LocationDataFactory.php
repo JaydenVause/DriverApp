@@ -17,6 +17,7 @@ class LocationDataFactory extends Factory
     public function definition(): array
     {
         return [
+            
             'postcode' => fake()->postcode(),
             'suburb' => fake()->text(),
             'state' => fake()->state()

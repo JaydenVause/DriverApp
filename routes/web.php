@@ -12,6 +12,8 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\UpdateDrivingInstructorTimetableController;
 use App\Http\Controllers\SearchLocationDataController;
 use App\Http\Controllers\SearchForDrivingInstructorsController;
+use App\Http\Controllers\ToggleAdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/approve-instructors/{registration_id}', [ApproveInstructorsController::class, 'approve']);
     Route::get('/instructor/update-profile', [UpdateDrivingInstructorTimetableController::class, 'index']);
     Route::patch('/instructor/update-profile', [UpdateDrivingInstructorTimetableController::class, 'patch']);
+    Route::get('/turn_on_admin', [ToggleAdminController::class, 'on']);
+    Route::get('/turn_off_admin', [ToggleAdminController::class, 'off']);
 });
 
 

@@ -13,6 +13,38 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminTest extends TestCase
 {
+
+
+    /**
+     * test user can make themselves admin
+     */
+    public function test_user_can_turn_on_admin(){
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/turn_on_admin');
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'admin' => 1
+        ]);
+
+    }
+
+    public function test_user_can_turn_off_admin(){
+        $user = User::factory()->admin()->create();
+
+        $response = $this->actingAs($user)->get('/turn_off_admin');
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id, 
+            'admin' => false
+        ]);
+    }
+
     /**
      * test admin can access admin dashboard
      */

@@ -5,6 +5,7 @@
 			return {
 				locationsFound: null,
 				searchVal: null,
+				isDirty: false
 
 			};
 		},
@@ -15,7 +16,7 @@
 			// query database for locations of location provided
 			searchForDrivingLocations(searchVal){
 				searchVal = searchVal.target.value
-				
+				this.isDirty = true;
 			    if(searchVal){
 			        axios.get('/search/location-data?query='+searchVal)
 			        .then((response) =>{
@@ -38,12 +39,23 @@
 	}
 </script>
 <template>
-	<input @input="searchForDrivingLocations" class="rounded-full p-3 w-full" type="text" placeholder="Enter postcode or suburb" v-model="searchVal" />
-    <ul class="bg-[#e1e4e8] overflow-auto max-h-[300px]" >
-        <template v-for="location in locationsFound">
-            <li class="p-3 hover:bg-gray-700 hover:text-white hover:cursor-pointer" @click="emitLocation(location)">
-                {{location.postcode}}, {{location.suburb}}, {{location.state}}
-            </li>
-        </template>
-    </ul>
+	<div class="p-8 rounded-lg">
+	  <h2 class="text-3xl font-bold text-white mb-4">Find Driving Instructors Near You</h2>
+	  <div class="flex items-center">
+	    <input @keyup="searchForDrivingLocations" class="rounded-full p-3 w-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-400" type="text" placeholder="Enter postcode or suburb" v-model="searchVal" />
+	    
+	  </div>
+	  <ul class="bg-white mt-4 overflow-auto max-h-[300px] rounded-lg shadow-lg">
+	    <template v-if="locationsFound">
+	      <template v-for="location in locationsFound">
+	        <li class="p-3 hover:bg-gray-700 hover:text-white hover:cursor-pointer" @click="emitLocation(location)">
+	          {{location.postcode}}, {{location.suburb}}, {{location.state}}
+	        </li>
+	      </template>
+	    </template>
+	    <template v-if="isDirty && !locationsFound">
+	      <li class="p-3">No results found</li>
+	    </template>
+	  </ul>
+	</div>
 </template>

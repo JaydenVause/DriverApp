@@ -9,7 +9,7 @@
 	<Header />
 		<div class="pt-[70px]">
 			<slot name="super" />
-			<div  class="max-w-[1200px] m-auto p-3" >
+			<div  class="max-w-[1200px] m-auto" >
 				<slot/>
 			</div>
 		</div>

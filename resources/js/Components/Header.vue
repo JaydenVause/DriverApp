@@ -46,7 +46,7 @@
     </div>
   </div>
   <!--mobile_navigation_menu-->
-  <nav :class="mobileNavOpen ? 'show-mobile-nav sm:hidden' : 'hidden-mobile-nav'">
+  <nav :class="mobileNavOpen ? 'show-mobile-nav md:hidden' : 'hidden-mobile-nav'">
     <ul>
       <li>
         <MobileHeaderLink href="/" name="Home"/>

@@ -19,7 +19,7 @@ class SearchLocationDataController extends Controller
         }
 
         return LocationData::select('id', 'suburb', 'postcode', 'state')
-            ->where('postcode', $request->input('query'))
+            ->where('postcode','LIKE', $request->input('query') . '%')
             ->orWhere('suburb','LIKE', '%' . strtoupper($request->input('query') . '%'))
             ->get();
     }

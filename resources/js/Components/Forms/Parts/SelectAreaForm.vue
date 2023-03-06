@@ -16,19 +16,28 @@
 			// query database for locations of location provided
 			searchForDrivingLocations(searchVal){
 				searchVal = searchVal.target.value
-				this.isDirty = true;
+				
 			    if(searchVal){
 			        axios.get('/search/location-data?query='+searchVal)
 			        .then((response) =>{
 			            this.locationsFound = response.data
+
+			            if(!response.data.length > 0){
+			            	this.isDirty = true;
+			            	console.log(this.isDirty)
+			            }else{
+			            	this.isDirty = false;
+			            }
 			        });
 			    }else{
+			    	this.isDirty = false;
 			        this.locationsFound = null;
 			    }
 			},
 
 			// let parent component know location is being transmitted for processing
 			emitLocation(location){
+				this.isDirty = false;
 				this.$emit('logLocation', location);
 					// driving locations input
 
@@ -53,7 +62,7 @@
 	        </li>
 	      </template>
 	    </template>
-	    <template v-if="isDirty && !locationsFound">
+	    <template v-if="isDirty">
 	      <li class="p-3">No results found</li>
 	    </template>
 	  </ul>

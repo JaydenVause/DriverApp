@@ -13,8 +13,10 @@
     <template>
         <Head title="Register Driving Instructor" />
         <MainTemplate>
-            <h1 class="text-2xl font-extrabold">Update instructor profile</h1>
-            <SearchAreaForm />
+            
+            <SearchAreaForm>
+                <h1 class="text-2xl font-extrabold">Update instructor profile</h1>
+            </SearchAreaForm>
             
         </MainTemplate>
     </template>

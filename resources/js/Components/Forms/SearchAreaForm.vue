@@ -107,6 +107,7 @@
 </script>
 <template>
 	<form class="flex flex-col gap-1 bg-white p-3" @submit.prevent="submit">
+				<slot />
                 <label>Days providing lessons</label>
                 <table>
                     <template v-for="day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']">

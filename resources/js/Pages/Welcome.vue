@@ -15,10 +15,21 @@
     <Head title="Welcome" />
     <MainTemplate>
       <template #super>
-        <div class="dark-gradient">
-          <div class="max-w-[1200px] mx-auto ">
-            <SelectAreaForm @logLocation="searchForDriversInArea" />
+        <div >
+          <div class='dark-gradient'>
+             <div class="max-w-[1200px]  mx-auto text-white py-10 ">
+                  <div class="container mx-auto px-4 lg:px-8 flex flex-col lg:flex-row items-center justify-between">
+                    <h1 class="text-4xl font-bold mb-4 lg:mb-0">Find Your Perfect Driving Instructor</h1>
+                    <p class="text-lg leading-relaxed">Connecting learner drivers with experienced instructors</p>
+                  </div>
+              </div>
           </div>
+            <div class="bg-black">
+              <SelectAreaForm @logLocation="searchForDriversInArea">
+                <h2 class="font-bold text-black">Find Driving Instructors Near You</h2>
+              </SelectAreaForm>
+            </div>
+          
         </div>
       </template>
       <main class="flex flex-wrap justify-center">

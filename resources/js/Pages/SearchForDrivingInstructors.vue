@@ -15,29 +15,26 @@ function searchForDriversInArea(location){
 	
     <MainTemplate>
     	<template #super>
-            <div class=" dark-gradient ">
-                <div class="dark-gradient">
-                    <div class="max-w-[1200px] m-auto flex flex-col gap-10">
-                        <SelectAreaForm @logLocation="searchForDriversInArea" />
-                    </div>
-                </div>
-                
+            <div class="bg-black">
+                <SelectAreaForm @logLocation="searchForDriversInArea">
+                    <h2 class="font-bold text-black">Find Driving Instructors Near You</h2>
+                </SelectAreaForm>
             </div>
         </template>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
         </template>
        <div>
-          <div class="container mx-auto py-8">
+          <div class="container mx-auto py-8 p-3 flex flex-col gap-4">
             <h1 v-if="$page.props.location" class="text-2xl font-bold">Showing driving instructors in {{ $page.props.location.postcode }}, {{ $page.props.location.suburb }}, {{ $page.props.location.state }}...</h1>
             <template v-if="$page.props.driving_instructors.length > 0">
               <template v-for="instructor in $page.props.driving_instructors">
-                <div class="border-solid border-2 border-gray-300 p-4">
+                <div class=" rounded p-4 bg-white shadow-xl">
                   <div class="flex items-center gap-4">
                     <img src="#" class="w-[60px] h-[60px] p-3 rounded-full bg-black" />
                     <p><strong>Name:</strong> {{instructor.name}}</p>
                   </div>
-                  <Link type="button" :href="'/create-booking/' + instructor.id" class="bg-yellow-500 p-3 m-auto block">Book Now</Link>
+                  <Link type="button" :href="'/create-booking/' + instructor.id" class="bg-yellow-500 p-3 m-auto block max-w-[100px] rounded hover:bg-black hover:text-white">Book Now</Link>
                 </div>
               </template>
             </template>

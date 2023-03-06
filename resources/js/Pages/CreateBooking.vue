@@ -53,7 +53,7 @@ let calendarOptions = {
 <template>
     <Head title="Search For Instructors" />
     <MainTemplate>
-    	<div class="bg-white p-4">
+    	<div class="bg-white p-4 flex flex-col gap-10">
 
     		<div>
     		  <label class="text-2xl">Select a day</label>

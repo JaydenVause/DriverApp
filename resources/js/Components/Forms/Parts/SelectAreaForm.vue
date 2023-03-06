@@ -48,19 +48,22 @@
 	}
 </script>
 <template>
-	<div class="rounded-lg p-8">
-	  <h2 class="text-3xl font-bold text-white mb-4">Find Driving Instructors Near You</h2>
-	  <div class="relative">
-	    <input @keyup="searchForDrivingLocations" class="rounded-full p-3 w-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-400" type="text" placeholder="Enter postcode or suburb" v-model="searchVal" />
-	    <ul class="bg-white mt-4 max-h-[300px] overflow-auto rounded-lg shadow-lg absolute z-10 top-full left-0 right-0" v-if="locationsFound">
-	      <template v-for="location in locationsFound">
-	        <li class="p-3 hover:bg-gray-700 hover:text-white hover:cursor-pointer" @click="emitLocation(location)">
-	          {{location.postcode}}, {{location.suburb}}, {{location.state}}
-	        </li>
-	      </template>
-	      <li class="p-3" v-if="isDirty">No results found</li>
-	    </ul>
-	  </div>
+	<div class="p-3  px-4 lg:px-8 ">
+		<div class="rounded-lg max-w-[1200px]  mx-auto bg-white rounded p-3 flex flex-col gap-3">
+		  <slot/>
+		  <div class="relative">
+		    <input @keyup="searchForDrivingLocations" class="rounded-full w-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-400" type="text" placeholder="Enter postcode or suburb" v-model="searchVal" />
+		    <ul class="bg-white mt-4 max-h-[300px] overflow-auto rounded-lg shadow-lg absolute z-10 top-full left-0 right-0" v-if="locationsFound">
+		      <template v-for="location in locationsFound">
+		        <li class="p-3 hover:bg-gray-700 hover:text-white hover:cursor-pointer" @click="emitLocation(location)">
+		          {{location.postcode}}, {{location.suburb}}, {{location.state}}
+		        </li>
+		      </template>
+		      <li class="p-3" v-if="isDirty">No results found</li>
+		    </ul>
+		  </div>
+		</div>
 	</div>
+
 
 </template>

@@ -15,7 +15,7 @@
     <Head title="Approve Instructors" />
     <MainTemplate>
 
-        <div class="shadow-2xl border-solid border-gray-100 border-2 p-3" v-for="registration in $page.props.registrations">
+        <div class="shadow-2xl border-solid border-gray-100 border-2 p-3 bg-white m-3" v-for="registration in $page.props.registrations">
             <p>Application ID: {{ registration.id }}</p>
             <p>User ID: {{registration.user_id}}</p>
             <p>Created At: {{ registration.created_at }}</p>

@@ -1,6 +1,6 @@
 <script setup>
 import MainTemplate from '@/Layouts/MainTemplate.vue';
-import { Head , router} from '@inertiajs/vue3';
+import { Head , router, Link} from '@inertiajs/vue3';
 import SelectAreaForm from '@/Components/Forms/Parts/SelectAreaForm.vue';
 function searchForDriversInArea(location){
         console.log(location.id);
@@ -37,7 +37,7 @@ function searchForDriversInArea(location){
                     <img src="#" class="w-[60px] h-[60px] p-3 rounded-full bg-black" />
                     <p><strong>Name:</strong> {{instructor.name}}</p>
                   </div>
-                  <button class="bg-yellow-500 p-3 m-auto block">Book Now</button>
+                  <Link type="button" :href="'/create-booking/' + instructor.id" class="bg-yellow-500 p-3 m-auto block">Book Now</Link>
                 </div>
               </template>
             </template>

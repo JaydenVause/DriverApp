@@ -12,8 +12,9 @@
                 <h1>Welcome {{$page.props.auth.user.name}}!</h1>
             </div>
         </template>
-        <h2 class="text-center">Admin Dashboard</h2>
-        <div>
+        
+        <div class="bg-white p-4">
+            <h2 class="text-center">Admin Dashboard</h2>
             <AdminPanelButton href="/admin/approve-instructors" name="Approve Instructors" type='button' />
         </div>
     </MainTemplate>

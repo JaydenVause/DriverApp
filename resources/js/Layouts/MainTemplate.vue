@@ -7,9 +7,9 @@
 </script>
 <template>
 	<Header />
-		<div class="pt-[70px]">
+		<div class="pt-[70px] min-h-[80vh] bg-yellow-400">
 			<slot name="super" />
-			<div  class="max-w-[1200px] m-auto" >
+			<div  class="max-w-[1200px] m-auto bg-yellow-400 " >
 				<slot/>
 			</div>
 		</div>

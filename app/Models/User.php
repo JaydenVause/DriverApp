@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasOne(DrivingInstructorRegistration::class);
     }
 
+    public function dayTimeDrivingDrivingInstructor(): HasOne
+    {
+        return $this->hasOne(DayTimeDrivingDrivingInstructor::class, 'instructor_id');
+    }
+
     public function locationDatas(): BelongsToMany
     {
         return $this

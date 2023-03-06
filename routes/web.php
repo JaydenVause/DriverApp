@@ -13,6 +13,7 @@ use App\Http\Controllers\UpdateDrivingInstructorTimetableController;
 use App\Http\Controllers\SearchLocationDataController;
 use App\Http\Controllers\SearchForDrivingInstructorsController;
 use App\Http\Controllers\ToggleAdminController;
+use App\Http\Controllers\CreateBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/instructor/update-profile', [UpdateDrivingInstructorTimetableController::class, 'patch']);
     Route::get('/turn_on_admin', [ToggleAdminController::class, 'on']);
     Route::get('/turn_off_admin', [ToggleAdminController::class, 'off']);
+    Route::get('/create-booking/{instructor_id}', [CreateBookingController::class, 'index']);
+    Route::post('/create-booking/{instructor_id}/get-available-booking-times', [CreateBookingController::class, 'getAvailableBookingTimes']);
 });
 
 

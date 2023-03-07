@@ -13,20 +13,17 @@ let availableBookingTimes = reactive({});
 
 // handles when date clicked
 function logDate(date){
-	 date = date.date;
+	 
 
-	 console.log(date.toISOString());
 
-	let dayOfWeek = date.getDay();
-	let dayDate = date.getUTCDate();
-	let monthDate =  date.getMonth()
-	let yearDate = date.getYear();
+	let dayOfWeek = date.date.getDay();
+	
 
-	console.log(dayOfWeek);
+	
 
 	let form = {
 		day: dayOfWeek,
-		datetime : date.toISOString(),	
+		datetime : date.dateStr,	
 	};
 
 	axios({
@@ -34,7 +31,7 @@ function logDate(date){
 		url: '/create-booking/'+ usePage().props.instructor_id + '/get-available-booking-times',
 		data: form
 	}).then((response)=>{
-		console.log(response.data.available_booking_times);
+		
 		availableBookingTimes.value = response.data.available_booking_times;
 	})
 }

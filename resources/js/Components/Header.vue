@@ -13,7 +13,7 @@
 </script>
 <template>
 	<header>
-  <div class="yellow-gradient header_nav">
+  <div class="bg-[rgb(32,32,32)] text-white header_nav">
     <div class="max-w-[1200px] m-auto h-[70px] flex items-center justify-between p-4">
       <HeaderLogo />
       <button class="md:hidden" @click="toggleMobileNav">

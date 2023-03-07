@@ -48,8 +48,8 @@
 	}
 </script>
 <template>
-	<div class="p-3  px-4 lg:px-8 ">
-		<div class="rounded-lg max-w-[1200px]  mx-auto bg-white rounded p-3 flex flex-col gap-3">
+	<div>
+		<div class="  md:min-w-[400px] rounded-lg mx-auto bg-white rounded p-3 flex flex-col gap-3">
 		  <slot/>
 		  <div class="relative">
 		    <input @keyup="searchForDrivingLocations" class="rounded-full w-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-400" type="text" placeholder="Enter postcode or suburb" v-model="searchVal" />

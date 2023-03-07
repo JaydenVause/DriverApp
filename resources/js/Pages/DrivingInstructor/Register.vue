@@ -8,10 +8,11 @@
 <template>
     <Head title="Register Driving Instructor" />
     <MainTemplate>
-        
-        <RegisterDrivingInstructorForm>
-            <h1 class="text-2xl font-extrabold">Register as driving instructor</h1>
-        </RegisterDrivingInstructorForm>
+        <section class="max-w-[1200px] m-auto">
+            <RegisterDrivingInstructorForm>
+                <h1 class="text-2xl font-extrabold">Register as driving instructor</h1>
+            </RegisterDrivingInstructorForm>
+        </section>
     </MainTemplate>
 </template>
 <style>

@@ -13,11 +13,11 @@
     <template>
         <Head title="Register Driving Instructor" />
         <MainTemplate>
-            
-            <SearchAreaForm>
-                <h1 class="text-2xl font-extrabold">Update instructor profile</h1>
-            </SearchAreaForm>
-            
+            <section class="max-w-[1200px] m-auto p-3">
+                <SearchAreaForm>
+                    <h1 class="text-2xl font-extrabold">Update instructor profile</h1>
+                </SearchAreaForm>
+            </section>
         </MainTemplate>
     </template>
     <style>

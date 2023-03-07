@@ -53,23 +53,25 @@ let calendarOptions = {
 <template>
     <Head title="Search For Instructors" />
     <MainTemplate>
-    	<div class="bg-white p-4 flex flex-col gap-10">
+    	<div class="p-4">
+    		<div class="bg-white p-4 flex flex-col gap-10 max-w-[1200px] m-auto rounded">
 
-    		<div>
-    		  <label class="text-2xl">Select a day</label>
-    		  <FullCalendar :style="{ 'max-height': '600px'}" :options="calendarOptions" />
-    	 	</div>
-    	 	<label class="text-2xl">Available booking times</label>
-    	 	<div class="flex flex-col items-center max-h-[400px] overflow-auto ">
+	    		<div>
+	    		  <label class="text-2xl">Select a day</label>
+	    		  <FullCalendar :style="{ 'max-height': '600px'}" :options="calendarOptions" />
+	    	 	</div>
+	    	 	<label class="text-2xl">Available booking times</label>
+	    	 	<div class="flex flex-col items-center max-h-[400px] overflow-auto ">
 
-    	 		<template v-for="booking in availableBookingTimes.value" v-if="availableBookingTimes.value">
-    	 			<button class="bg-yellow-400 w-full p-3 hover:text-white hover:bg-black my-1 max-w-[300px]">{{booking}}</button>
-    	 		</template>
-    	 		<template v-else>
-    	 			<p class="p-3">No times available...</p>
-    	 		</template>
-    	 	</div>
-    	 </div>
+	    	 		<template v-for="booking in availableBookingTimes.value" v-if="availableBookingTimes.value">
+	    	 			<button class="bg-yellow-400 w-full p-3 hover:text-white hover:bg-black my-1 max-w-[300px]">{{booking}}</button>
+	    	 		</template>
+	    	 		<template v-else>
+	    	 			<p class="p-3">No times available...</p>
+	    	 		</template>
+	    	 	</div>
+	    	 </div>
+    	</div>
     </MainTemplate>
 </template>
 <style>

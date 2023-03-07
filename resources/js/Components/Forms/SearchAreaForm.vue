@@ -106,7 +106,7 @@
 	
 </script>
 <template>
-	<form class="flex flex-col gap-1 bg-white p-3" @submit.prevent="submit">
+	<form class="flex flex-col gap-1 bg-white p-3 rounded" @submit.prevent="submit">
 				<slot />
                 <label>Days providing lessons</label>
                 <table>

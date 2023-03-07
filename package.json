@@ -21,6 +21,7 @@
         "@fullcalendar/core": "^6.1.4",
         "@fullcalendar/daygrid": "^6.1.4",
         "@fullcalendar/interaction": "^6.1.4",
-        "@fullcalendar/vue3": "^6.1.4"
+        "@fullcalendar/vue3": "^6.1.4",
+        "aos": "^3.0.0-beta.6"
     }
 }

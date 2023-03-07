@@ -14,17 +14,18 @@
 <template>
     <Head title="Approve Instructors" />
     <MainTemplate>
-
-        <div class="shadow-2xl border-solid border-gray-100 border-2 p-3 bg-white m-3" v-for="registration in $page.props.registrations">
-            <p>Application ID: {{ registration.id }}</p>
-            <p>User ID: {{registration.user_id}}</p>
-            <p>Created At: {{ registration.created_at }}</p>
-            <p>Last Modified: {{ registration.updated_at}}</p>
-            <p>User Name: {{ registration.name }}</p>
-            <p>User Email: {{ registration.email }}</p>
-            <p>View medical: <a class="underline text-blue-700" :href="'/secure-store/' + registration.medical">Download</a></p>
-            <p>Application status: {{registration.approved ? "Approved" : "Pending..."}}</p>
-            <button class="bg-yellow-500 p-3 m-auto block" @click="approveApplication(registration.id)" v-if="!registration.approved">Approve</button>
-        </div>
+        <section class="max-w-[1200px] m-auto ">
+            <div class="shadow-2xl border-solid border-gray-100 border-2 p-3 bg-white m-3 rounded" v-for="registration in $page.props.registrations">
+                <p>Application ID: {{ registration.id }}</p>
+                <p>User ID: {{registration.user_id}}</p>
+                <p>Created At: {{ registration.created_at }}</p>
+                <p>Last Modified: {{ registration.updated_at}}</p>
+                <p>User Name: {{ registration.name }}</p>
+                <p>User Email: {{ registration.email }}</p>
+                <p>View medical: <a class="underline text-blue-700" :href="'/secure-store/' + registration.medical">Download</a></p>
+                <p>Application status: {{registration.approved ? "Approved" : "Pending..."}}</p>
+                <button class="bg-yellow-500 p-3 m-auto block" @click="approveApplication(registration.id)" v-if="!registration.approved">Approve</button>
+            </div>
+        </section>
     </MainTemplate>
 </template>

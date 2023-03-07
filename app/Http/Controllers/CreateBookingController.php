@@ -7,14 +7,123 @@ use Inertia\Inertia;
 use App\Models\DayTimeDrivingDrivingInstructor;
 use DateTime;
 use DateTimezone;
+use App\Models\DrivingLesson;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class CreateBookingController extends Controller
 {
+
+    public function process_booking(Request $request, $instructor_id){
+        $validated = $request->validate([
+            'dates' => 'required',
+            'dates.*' => 'date_format:Y-m-d h:s'
+        ]);
+        
+        $user = Auth::user();
+
+        $instructor = User::where('id', $instructor_id)->first();
+
+        $booking_times = $validated['dates'];
+
+        foreach($booking_times as $booking){
+            DrivingLesson::create([
+                'user_id' => $user->id,
+                'instructor_id' => $instructor->id,
+                'lesson_datetime' => $booking
+            ]);
+        }
+    }
+
     public function index($instructor_id){
         return Inertia::render('CreateBooking', [
             'instructor_id' => $instructor_id
         ]);
     }
+
+    public function getDaysWithTimeslot(Request $request, $instructor_id){
+    $validated = $request->validate([
+        'dates' => 'required',
+        'dates.*' => 'date_format:Y-m-d'
+    ]);
+
+    $dates = $validated['dates'];
+    $times_available_to_from = DayTimeDrivingDrivingInstructor::where('instructor_id', $instructor_id)->first();
+    
+    $dates_available = [];
+    $driving_instructors_schedule = [];
+
+    foreach($dates as $date){
+        $day = new DateTime($date);
+        $day_name = strtolower($day->format('l'));
+       
+        $time_instructors_schedule[$day_name]['from'] = $times_available_to_from->{$day_name . '_from'};
+        $time_instructors_schedule[$day_name]['to'] = $times_available_to_from->{$day_name . '_to'};
+        $driving_instructor_bookings[$date] = 
+        DrivingLesson::where('instructor_id', $instructor_id)->where('lesson_datetime', 'like', $date.'%')->get();
+    }
+
+    // dd($dates, $driving_instructors_schedule);
+
+    foreach($dates as $date){
+        //check if driving instructor has 1 hour of free timeslots between times he is driving
+        $dateTimeCurrent = new DateTime($date);
+        $day_name = strtolower($dateTimeCurrent->format('l'));
+        $booking_allowed = false;
+
+        // check instructor is driving on that day
+        if(!$time_instructors_schedule[$day_name]['to'] && !$time_instructors_schedule[$day_name]['from']){
+            continue;
+        }
+
+        //get the day that that date is of
+        $day = new DateTime($date);
+        $day_name = strtolower($day->format('l'));
+        
+        //start from when driver starts driving
+        $day_current = new DateTime($date . ' ' . $time_instructors_schedule[$day_name]['from']);
+        //when driver finishes driving
+        $day_end = new DateTime($date . ' ' . $time_instructors_schedule[$day_name]['to']);
+
+        $x = 0;
+
+        while($day_current < $day_end){
+            foreach($driving_instructor_bookings[$date] as $booking ){
+                $booking = new DateTime($booking);
+
+                if($day_current == $booking){
+                    $day_current->modify('+30 minutes');
+                    $x = 0;
+                    continue;
+                }
+                $day_current->modify('+30 minutes');
+                $x += 1;
+                continue;
+            }
+            $day_current->modify('+30 minutes');
+
+            $x += 1;
+
+            if($x >= 2){
+               $booking_allowed = true;
+               break;
+            }
+        }
+
+        // dd($x, $day_current);
+            
+        if($booking_allowed){
+            $dates_available[] = $date;
+        }
+    }
+
+    // dd($dates_available);
+    
+    return [
+        'days_available' => $dates_available
+    ];
+}
+
 
     public function getAvailableBookingTimes(Request $request, $instructor_id){
         $validated = $request->validate([

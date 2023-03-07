@@ -12,6 +12,55 @@ use Carbon\Carbon;
 class UserBookDrivingInstructorTest extends TestCase
 {
 
+    public function test_user_can_book_instructor(){
+        $user = User::factory()->create();
+        $instructor = User::factory()->driving_instructor()->has(DayTimeDrivingDrivingInstructor::factory())->create();
+
+        $data = [
+            'dates' => ['2023-03-06 08:00'] #mon 6 mar
+        ];
+
+        $response = $this->actingAs($user)->post('/create-booking/'.$instructor->id.'/process', $data);
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('driving_lessons', [
+            'user_id' => $user->id,
+            'instructor_id' => $instructor->id,
+            'lesson_datetime' => $data['dates'][0]
+        ]);
+    }
+
+    public function test_user_can_get_dates_available_booking_times(){
+        $driving_instructor = User::factory()->driving_instructor()->has(DayTimeDrivingDrivingInstructor::factory())->create();
+        //mon tue fri available
+        $data = [
+            'dates' => [
+                '2023-03-05', #sun
+                '2023-03-06', #mon
+                '2023-03-07', #tue
+                '2023-03-08', #wed
+                '2023-03-09', #thur
+                '2023-03-10', #fri
+                '2023-03-11', #sat
+            ]
+        ];
+
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post('/create-booking/'.$driving_instructor->id.'/get-days-with-timeslot', $data);
+
+        $response->assertStatus(200);
+
+        $response->assertJson([
+            'days_available' => [
+                $data['dates'][1],
+                $data['dates'][2],
+                $data['dates'][5]
+            ]
+        ]);
+    }
+
     public function test_user_can_get_booking_times(){
         $driving_instructor = User::factory()->driving_instructor()->has(DayTimeDrivingDrivingInstructor::factory())->create();
 

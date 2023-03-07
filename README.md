@@ -22,7 +22,8 @@ that the innerworkings and backend functionality going on here is relatively in 
 ## 3rd party data used
 
 * https://www.matthewproctor.com/australian_postcodes (for postcode data in australia populate database)
-
+* https://michalsnik.github.io/aos/ ( Fade in animations javascript)
+* https://fullcalendar.io/ ( calendar booking ui javascript)
 
 ## Final notes
 

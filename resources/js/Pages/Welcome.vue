@@ -19,7 +19,7 @@
     <Head title="Welcome" />
     <MainTemplate>
       <template #super>
-        <div class="bg-[rgb(32,32,32)] ">
+        <div class="bg-[rgb(32,32,32)] " id="locationAnchor">
           <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
             <div class="lg:flex lg:items-center lg:justify-between">
               <div>
@@ -31,7 +31,7 @@
                 </p>
               </div>
               <div class="mt-8 lg:mt-0">
-                <SelectAreaForm @logLocation="searchForDriversInArea" id="locationAnchor">
+                <SelectAreaForm @logLocation="searchForDriversInArea" >
                   <h2 class="font-bold text-black text-lg">Find Driving Instructors Near You</h2>
                 </SelectAreaForm>
               </div>
@@ -41,9 +41,9 @@
       </template>
 
       <main class="flex flex-wrap justify-center">
-          <section class="py-[100px]  bg-yellow-400 text-black  max-w-[1200px]">
+          <section class=" bg-yellow-400 text-black  max-w-[1200px]">
             <div class="container mx-auto">
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-4">
                 <span class="flex flex-col gap-3 bg-white p-10 rounded">
                     <p class="text-center text-2xl underline">Expert Instructors</p>
                     <p class="text-center">We offer flexible scheduling options to fit your needs and availability</p>
@@ -61,9 +61,10 @@
                 </span>
               </div>
             </div>
+             <hr class="hr" />
           </section>
-          <section class="w-full ">
-              <div class="driving-king bg-gray-100 py-10 py-[100px] ">
+          <section class="w-full " >
+              <div class="driving-king bg-gray-100 py-10 py-[100px] " data-aos="zoom-in" data-aos-duration="700">
                 <h2 class="text-3xl font-bold mb-8 text-center text-black">Learn to Drive with DrivingKing</h2>
                 <div class="max-w-3xl mx-auto px-4">
                   <p class="text-xl mb-6 text-center text-gray-700">
@@ -90,13 +91,13 @@
                     Ready to get started? Search for instructors in your area now and take the first step towards becoming a confident and safe driver!
                   </p>
                   <div class="text-center">
-                    <button data-aos-anchor="#locationAnchor" class="bg-black text-white py-2 px-6 rounded hover:bg-yellow-500 transition-colors duration-300">Find an Instructor</button>
+                    <a href="#locationAnchor" class="bg-black text-white py-2 px-6 rounded hover:bg-yellow-500 transition-colors duration-300">Find an Instructor</a>
                   </div>
                 </div>
               </div>
           </section>
           <section class="lg:w-full flex flex-col gap-[40px]  max-w-[1200px] py-[100px] md:items-center lg:items-start">
-            <h2 class="text-5xl" data-aos="fade-down"  data-aos-duration="1000">What our previous students have to say</h2>
+            <h2 class="text-5xl" data-aos="fade-down"  data-aos-duration="1000">What our previous students have to say...</h2>
 
             <div class="flex items-center gap-4 bg-white p-3 max-w-[600px]  shadow-2xl m-3 lg:self-end rounded" data-aos="fade-left" data-aos-duration="1500">
                <img alt="profile picture" src="#" class=" bg-black min-h-[100px] min-w-[100px] rounded-full"/>
@@ -147,5 +148,14 @@
     .dark-gradient{
          background: rgb(32,32,32);
         background: linear-gradient(120deg, rgba(32,32,32,1) 0%, rgba(71,71,69,1) 100%); 
+    }
+
+    .hr{
+        display: block;
+      height: 1px;
+      border: 0;
+      border-top: 1px solid black;
+      margin: 1em 0;
+      padding: 0;
     }
 </style>

@@ -8,7 +8,7 @@
 <template>
     <Head title="Register Driving Instructor" />
     <MainTemplate>
-        <section class="max-w-[1200px] m-auto">
+        <section class="max-w-[1200px] m-auto py-3">
             <RegisterDrivingInstructorForm>
                 <h1 class="text-2xl font-extrabold">Register as driving instructor</h1>
             </RegisterDrivingInstructorForm>

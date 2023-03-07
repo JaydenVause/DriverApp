@@ -47,12 +47,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/approve-instructors/{registration_id}', [ApproveInstructorsController::class, 'approve']);
     Route::get('/instructor/update-profile', [UpdateDrivingInstructorTimetableController::class, 'index']);
     Route::patch('/instructor/update-profile', [UpdateDrivingInstructorTimetableController::class, 'patch']);
-    Route::get('/turn_on_admin', [ToggleAdminController::class, 'on']);
-    Route::get('/turn_off_admin', [ToggleAdminController::class, 'off']);
-    Route::get('/create-booking/{instructor_id}', [CreateBookingController::class, 'index']);
-    Route::post('/create-booking/{instructor_id}/get-available-booking-times', [CreateBookingController::class, 'getAvailableBookingTimes']);
+
 });
 
+Route::get('/turn_on_admin', [ToggleAdminController::class, 'on']);
+Route::get('/turn_off_admin', [ToggleAdminController::class, 'off']);
+Route::get('/create-booking/{instructor_id}', [CreateBookingController::class, 'index']);
+Route::post('/create-booking/{instructor_id}/get-available-booking-times', [CreateBookingController::class, 'getAvailableBookingTimes']);
+Route::post('/create-booking/{instructor_id}/get-days-with-timeslot', [CreateBookingController::class, 'getDaysWithTimeslot']);
+Route::post('/create-booking/{instructor_id}/process', [CreateBookingController::class, 'process_booking']);
 
 
 Route::get('/search/location-data', [SearchLocationDataController::class, 'search']);

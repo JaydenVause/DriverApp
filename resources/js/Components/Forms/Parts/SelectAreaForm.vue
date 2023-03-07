@@ -24,7 +24,6 @@
 
 			            if(!response.data.length > 0){
 			            	this.isDirty = true;
-			            	console.log(this.isDirty)
 			            }else{
 			            	this.isDirty = false;
 			            }

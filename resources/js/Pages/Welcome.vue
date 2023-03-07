@@ -9,8 +9,6 @@
     AOS.init();
 
     function searchForDriversInArea(location){
-        console.log(location.id);
-
         router.get('/driving-instructors?query='+location.id);
     }
 </script>

@@ -29,8 +29,7 @@
 	            data[day] = false
 	        }
 	    });
-	    console.log(data);
-	    
+
 	    return data;
 	}
 
@@ -53,8 +52,6 @@
 
 	// turn day on and off
 	let toggleDay = function ( day ){
-	    console.log(day);
-	    
 	    if(form.days_times_driving[day]){
 	        form.days_times_driving[day] = false
 	        
@@ -71,7 +68,6 @@
 	//form submission
 
 	function submit(){
-	    console.log(form);
 	    form.patch('/instructor/update-profile');
 	}
 

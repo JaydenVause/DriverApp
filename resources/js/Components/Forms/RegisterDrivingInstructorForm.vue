@@ -12,7 +12,6 @@
     });
 
     function submit(){
-        console.log(form);
         form.post('/register/driving-instructor');
     }
 </script>

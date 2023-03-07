@@ -19,9 +19,7 @@ let availableBookingTimes = reactive({});
 
 // handles when date clicked
 function logDate(date){
-	if(date.dayEl.classList.contains('fc-enabled')){
-		//console.log(date.dayEl)
-		
+	if(date.dayEl.classList.contains('fc-enabled')){		
 		if(selectedDate.classList){
 			selectedDate.classList.remove('fc-selected');
 		}
@@ -31,7 +29,6 @@ function logDate(date){
 		if(selectedDate.classList){
 			selectedDate.classList.add('fc-selected');
 		}
-
 
 		let dayOfWeek = date.date.getDay();	
 
@@ -75,22 +72,14 @@ function clearDates(){
 		url: '/create-booking/'+ usePage().props.instructor_id + '/get-days-with-timeslot',
 		data: days_current
 	}).then((response)=>{
-		
-
 		date_elements.forEach((element)=>{
 			if(!response.data.days_available.includes(element.dataset.date)){
-				
 				element.classList.add('fc-disabled')
-
 			}else{
-				element.addEventListener('click', function(event){
-
-				})
 				element.classList.add('fc-enabled')
 			}
 		})
 	})
-
 }
 
 </script>

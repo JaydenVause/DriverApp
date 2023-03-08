@@ -38,7 +38,7 @@
         </div>
       </template>
 
-      <main class="flex flex-wrap justify-center overflow-x:hidden">
+      <main class="flex flex-wrap justify-center overflow-x-hidden">
           <section class=" bg-yellow-400 text-black  max-w-[1200px]">
             <div class="container mx-auto">
               <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-4">

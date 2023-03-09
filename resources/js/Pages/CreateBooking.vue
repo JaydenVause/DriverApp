@@ -15,8 +15,12 @@ let days_current = reactive({
 	dates : []
 });
 
-let availableBookingTimes = reactive({});
+let bookingTimesSelected= useForm({
+	dates: {}
+});
 
+let availableBookingTimes = reactive({});
+let chosenMonth = ref(false);
 // handles when date clicked
 function logDate(date){
 	if(date.dayEl.classList.contains('fc-enabled')){		
@@ -52,7 +56,7 @@ function logDate(date){
 let calendarOptions = {
 	plugins: [ dayGridPlugin, interactionPlugin ],
 	initialView: 'dayGridMonth',
-	aspectRatio: .75,
+	aspectRatio: .5,
 	dateClick: logDate,
 	datesSet: clearDates
 }
@@ -60,6 +64,7 @@ let calendarOptions = {
 function clearDates(){
 	let collection = [];
 	let date_elements = document.querySelectorAll('.fc-daygrid-day');
+
 
 	date_elements.forEach((element)=>{
 		collection.push(element.dataset.date)
@@ -82,27 +87,79 @@ function clearDates(){
 	})
 }
 
+function addBooking(bookingtime){
+	bookingTimesSelected.dates = bookingtime;
+}
+
+function processBookings(){
+	bookingTimesSelected.post('/create-booking/' + usePage().props.instructor_id + '/process');
+}
+
+function clearBookingTime(bookingTime){
+
+	bookingTimesSelected.dates = [];
+}
+
+function formattedDate(dateStr) {
+
+  let date = new Date(dateStr);
+  let startHour = date.getHours();
+  let startMinute = date.getMinutes();
+  let endHour = startHour;
+  let endMinute = startMinute 
+  
+ 
+    endHour += 1;
+    
+
+
+  return `${startHour.toString().padStart(2, '0')}:${startMinute.toString().padStart(2, '0')} - ${endHour.toString().padStart(2, '0')}:${endMinute.toString().padStart(2, '0')}`;
+}
+
+
+
 </script>
 
 <template>
     <Head title="Search For Instructors" />
     <MainTemplate>
+    	{{ bookingTimesSelected.errors }}
     	<div class="p-4">
     		<div class="bg-white p-4 flex flex-col gap-10 max-w-[1200px] m-auto rounded">
 	    		<div>
 	    		  <label class="text-2xl">Select a day</label>
 	    		  <FullCalendar :style="{ 'max-height': '600px'}" :options="calendarOptions" />
 	    	 	</div>
-	    	 	<label class="text-2xl">Available booking times</label>
-	    	 	<div class="flex flex-col items-center max-h-[400px] overflow-auto ">
 
+	    	 	<template v-if="bookingTimesSelected.dates.length >= 1">
+	    	 		<label class="text-2xl">Selected booking</label>
+	    	 		<span class="relative w-full max-w-[400px] m-auto">
+					    <button class='bg-yellow-400 p-3 w-full hover:cursor-pointer rounded  m-auto'>
+					        {{bookingTimesSelected.dates}}
+					    </button>
+					    <button @click="clearBookingTime(Object.keys(bookingTimesSelected.dates)[0])" class="absolute top-1/2 right-[10px] transform -translate-y-1/2 bg-black rounded-full text-white w-[20px] h-[20px] flex items-center justify-center">
+					        X
+					    </button>
+						</span>
+	    	 	</template>
+
+
+	    	 	<label class="text-2xl">Available booking times</label>
+	    	 	<div class="flex flex-col items-center max-h-[400px] overflow-auto gap-3 ">
 	    	 		<template v-for="booking in availableBookingTimes.value" v-if="availableBookingTimes.value">
-	    	 			<button class="bg-yellow-400 w-full p-3 hover:text-white hover:bg-black my-1 max-w-[300px]">{{booking}}</button>
+	    	 			<button 
+	    	 				:disabled="Object.keys(bookingTimesSelected.dates).length < 1 || bookingTimesSelected.dates[booking] ? false : true" @click="addBooking(booking)"
+	    	 				:class="Object.keys(bookingTimesSelected.dates).length < 1  || bookingTimesSelected.dates[booking]  ?
+	    	 				'bg-yellow-400 p-3 w-full hover:cursor-pointer rounded max-w-[400px]' : 'bg-gray-400 p-3 w-full  rounded max-w-[400px]'"
+	    	 			>{{formattedDate(booking)}}</button>
 	    	 		</template>
 	    	 		<template v-else>
 	    	 			<p class="p-3">No times available...</p>
 	    	 		</template>
 	    	 	</div>
+
+	    	 	
+	    	 	<button @click="processBookings" :class="Object.keys(bookingTimesSelected.dates).length > 0 ? 'bg-yellow-400 p-3 hover:cursor-pointer' : 'bg-gray-400 p-3'" :disabled="Object.keys(bookingTimesSelected.dates).length > 0 ? false : true">Create booking</button>
 	    	 </div>
     	</div>
     </MainTemplate>
@@ -120,7 +177,11 @@ function clearDates(){
 	}
 
 	.fc-selected{
-		background: yellow;
+		background: rgb(250 204 21 / var(--tw-bg-opacity));
+	}
+
+	.fc-chosen-month{
+		background-color: red !important;
 	}
 
 </style>

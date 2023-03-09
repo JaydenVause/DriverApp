@@ -8,28 +8,39 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\DayTimeDrivingDrivingInstructor;
 use Carbon\Carbon;
+use DateTime;
+use App\Models\DrivingLesson;
 
 class UserBookDrivingInstructorTest extends TestCase
 {
+
+    use RefreshDatabase;
 
     public function test_user_can_book_instructor(){
         $user = User::factory()->create();
         $instructor = User::factory()->driving_instructor()->has(DayTimeDrivingDrivingInstructor::factory())->create();
 
         $data = [
-            'dates' => ['2023-03-06 08:00'] #mon 6 mar
+            'time_length' => '1',
+            'dates' => '2023-03-06 08:00:00' #mon 6 mar
         ];
+
+        $finish_datetime = new DateTime($data['dates']);
+
+        $finish_datetime->modify('+1 hour');
 
         $response = $this->actingAs($user)->post('/create-booking/'.$instructor->id.'/process', $data);
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
 
         $this->assertDatabaseHas('driving_lessons', [
             'user_id' => $user->id,
             'instructor_id' => $instructor->id,
-            'lesson_datetime' => $data['dates'][0]
+            'lesson_datetime' => $data['dates'],
+            'finish_datetime' => $finish_datetime->format('Y-m-d h:i:s'),
         ]);
     }
+
 
     public function test_user_can_get_dates_available_booking_times(){
         $driving_instructor = User::factory()->driving_instructor()->has(DayTimeDrivingDrivingInstructor::factory())->create();
@@ -65,6 +76,9 @@ class UserBookDrivingInstructorTest extends TestCase
         $driving_instructor = User::factory()->driving_instructor()->has(DayTimeDrivingDrivingInstructor::factory())->create();
 
         $user = User::factory()->create();
+
+        $driving_lesson = DrivingLesson::factory()->for($driving_instructor, 'driving_instructor')->count(2)->create();
+
          // 2023-02-27T13:00:00.000Z tue 27 march
         $data = [
             'day' => 2,
@@ -78,9 +92,6 @@ class UserBookDrivingInstructorTest extends TestCase
         // is available from 8am-12:30pm
         $response->assertJson([
             'available_booking_times' => [
-                '2023-02-27 08:00:00',
-                '2023-02-27 08:30:00',
-                '2023-02-27 09:00:00',
                 '2023-02-27 09:30:00',
                 '2023-02-27 10:00:00',
                 '2023-02-27 10:30:00',
@@ -88,6 +99,9 @@ class UserBookDrivingInstructorTest extends TestCase
                 '2023-02-27 11:30:00',
             ] 
         ]);
+
+        // 'lesson_datetime' => '2023-02-27T08:30:00',
+        //     'finish_datetime' => '2023-02-27T09:30:00'
     }
 
     /**

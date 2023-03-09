@@ -16,23 +16,28 @@ class CreateBookingController extends Controller
 
     public function process_booking(Request $request, $instructor_id){
         $validated = $request->validate([
-            'dates' => 'required',
-            'dates.*' => 'date_format:Y-m-d h:s'
+            'dates' => 'required|date_format:Y-m-d h:i:s'
         ]);
         
         $user = Auth::user();
 
         $instructor = User::where('id', $instructor_id)->first();
 
-        $booking_times = $validated['dates'];
+        $booking = $validated['dates'];
 
-        foreach($booking_times as $booking){
-            DrivingLesson::create([
-                'user_id' => $user->id,
-                'instructor_id' => $instructor->id,
-                'lesson_datetime' => $booking
-            ]);
-        }
+        
+        $datetime_start = new DateTime($booking);
+        $datetime_finish = new DateTime($booking);
+        $datetime_finish->modify('+1 hour');
+        DrivingLesson::create([
+            'user_id' => $user->id,
+            'instructor_id' => $instructor->id,
+            'lesson_datetime' => $datetime_start->format('Y-m-d h:i'),
+            'finish_datetime' => $datetime_finish->format('Y-m-d h:i')
+        ]);
+    
+
+        return to_route('dashboard');
     }
 
     public function index($instructor_id){
@@ -89,7 +94,7 @@ class CreateBookingController extends Controller
 
         while($day_current < $day_end){
             foreach($driving_instructor_bookings[$date] as $booking ){
-                $booking = new DateTime($booking);
+                $booking = new DateTime($booking->lesson_datetime);
 
                 if($day_current == $booking){
                     $day_current->modify('+30 minutes');
@@ -156,6 +161,11 @@ class CreateBookingController extends Controller
                 break;
         }
 
+        // get current driving lessons
+        $driving_instructor = User::where('id', $instructor_id)->first();
+
+       
+
         $driving_availablity = DayTimeDrivingDrivingInstructor::where('instructor_id', $instructor_id)->first();
        // fetch the driving availability for the instructor and day
         if(!isset($driving_availablity->{$day . '_to'}) || !isset($driving_availablity->{$day . '_from'})){
@@ -166,6 +176,8 @@ class CreateBookingController extends Controller
 
         // convert the datetime string to a DateTime object in UTC timezone
         $date = new DateTime($validated['datetime'], new DateTimeZone('UTC'));
+        
+        
 
         // create a DateTime object for the same date as the input datetime string and with the time set to the value of $driving_starts
         $appointment_start = new DateTime($date->format('Y-m-d') . ' ' . $driving_starts, new DateTimeZone('UTC'));
@@ -175,22 +187,43 @@ class CreateBookingController extends Controller
         // create an empty array to store available appointment times
         $available_times = array();
 
+
+
+
         // loop over half-hour intervals until we reach the driving finish time
-        while ($appointment_start <= $appointment_end) {
+        while ($appointment_start < $appointment_end) {
             // check if the appointment time is available
-            // if (/* add your availability check here */) {
-                // if the appointment time is available, add it to the array
-                $available_times[] = $appointment_start->format('Y-m-d H:i:s');
-            // }
+                $shallow_copy = clone $appointment_start;
+
+                $conflicting_appointments = $driving_instructor
+                ->drivingLessons()
+                ->where('lesson_datetime', '=', $appointment_start->format('Y-m-d h:i:s')) #check booking isnt made for when date made
+                ->orWhere('lesson_datetime',  '=', $shallow_copy->modify('+30 minutes')->format('Y-m-d h:i:s')) #check booking isnt made for 30 minute after date
+                ->orWhere('lesson_datetime',  '=', $shallow_copy->modify('-60 minutes')->format('Y-m-d h:i:s')) #check booking isnt made for 30 minutes before
+                ->get();
+
+                
+
+                if(! count($conflicting_appointments) > 0){
+                    // if the appointment time is available, add it to the array
+                    $available_times[] = $appointment_start->format('Y-m-d h:i:s');    
+                }
+
+                
             
             // increment the appointment time by 30 minutes
             $appointment_start->modify('+30 minutes');
         }
 
-        // return the array of available appointment times
+
         return [
             'available_booking_times' => $available_times
         ];
+
+        // return the array of available appointment times
+       
+
+
 
 
     }

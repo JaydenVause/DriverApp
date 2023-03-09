@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -64,5 +64,15 @@ class User extends Authenticatable
              'instructor_id', 
              'location_data_id'
          );
+    }
+
+    public function drivingLessons(): HasMany
+    {
+        return $this->hasMany(DrivingLesson::class, 'instructor_id');
+    }
+
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(DrivingLesson::class, 'user_id');
     }
 }

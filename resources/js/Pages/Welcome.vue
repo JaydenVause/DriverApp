@@ -39,28 +39,29 @@
       </template>
 
       <main class="flex flex-wrap justify-center overflow-x-hidden">
-          <section class=" bg-yellow-400 text-black  max-w-[1200px]">
-            <div class="container mx-auto">
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-4">
-                <span class="flex flex-col gap-3 bg-white p-10 rounded">
-                    <p class="text-center text-2xl underline">Expert Instructors</p>
-                    <p class="text-center">We offer flexible scheduling options to fit your needs and availability</p>
-                    <img class="w-20 m-auto" alt="flexible scheduling icon" src="/imgs/icons/instructor-lecture-with-sceen-projection-tool-svgrepo-com.svg" />
-                </span>
-                <span class="flex flex-col gap-3 bg-white p-10 rounded">
-                    <p class="text-center text-2xl underline">Flexible Schedule</p>
-                    <p class="text-center">We offer flexible scheduling options to fit your needs and availability</p>
-                    <img class="w-20 m-auto" alt="flexible scheduling icon" src="/imgs/icons/calendar-symbol-svgrepo-com.svg" />
-                </span>
-                <span class="flex flex-col gap-3 bg-white p-10 rounded">
-                    <p class="text-center text-2xl underline">Competetive Prices</p>
-                    <p class="text-center">We offer flexible scheduling options to fit your needs and availability</p>
-                    <img class="w-20 m-auto" alt="flexible scheduling icon" src="/imgs/icons/money-svgrepo-com.svg" />
-                </span>
+          <section class="bg-yellow-400 text-black max-w-[1200px]">
+          <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-4">
+              <div class="flex flex-col justify-center items-center bg-white p-10 rounded shadow-lg transform transition-all hover:scale-105">
+                <img class="w-20 mb-4" alt="expert instructors icon" src="/imgs/icons/instructor-lecture-with-sceen-projection-tool-svgrepo-com.svg" />
+                <h3 class="text-center text-xl font-bold mb-2">Expert Instructors</h3>
+                <p class="text-center">Our experienced instructors provide quality education to help you pass your driving test.</p>
+              </div>
+              <div class="flex flex-col justify-center items-center bg-white p-10 rounded shadow-lg transform transition-all hover:scale-105">
+                <img class="w-20 mb-4" alt="flexible schedule icon" src="/imgs/icons/calendar-symbol-svgrepo-com.svg" />
+                <h3 class="text-center text-xl font-bold mb-2">Flexible Schedule</h3>
+                <p class="text-center">We offer flexible scheduling options to fit your needs and availability.</p>
+              </div>
+              <div class="flex flex-col justify-center items-center bg-white p-10 rounded shadow-lg transform transition-all hover:scale-105">
+                <img class="w-20 mb-4" alt="competitive prices icon" src="/imgs/icons/money-svgrepo-com.svg" />
+                <h3 class="text-center text-xl font-bold mb-2">Competitive Prices</h3>
+                <p class="text-center">We offer competitive prices for our quality driving instruction services.</p>
               </div>
             </div>
-             <hr class="hr" />
-          </section>
+          </div>
+          <hr class="hr" />
+        </section>
+
           <section class="w-full " >
               <div class="driving-king bg-gray-100 py-10 py-[100px] " data-aos="zoom-in" data-aos-duration="700">
                 <h2 class="text-3xl font-bold mb-8 text-center text-black">Learn to Drive with DrivingKing</h2>
@@ -98,7 +99,7 @@
             <h2 class="text-5xl" data-aos="fade-down"  data-aos-duration="1000">What our previous students have to say...</h2>
 
             <div class="flex items-center gap-4 bg-white p-3 max-w-[600px]  shadow-2xl m-3 lg:self-end rounded" data-aos="fade-left" data-aos-duration="1500">
-               <img alt="profile picture" src="#" class=" bg-black min-h-[100px] min-w-[100px] rounded-full"/>
+               <img alt="profile picture" src="/imgs/dps/dp1.jpg" class=" bg-black w-[100px] h-[100px] min-w-[100px] min-h-[100px] object-cover rounded-full"/>
                <div>
                  <p class="font-extrabold">Michael Brown</p>
                  <p>"I've tried other driving instructor apps before, but DrivingKing is by far the best one out there! The instructors are knowledgeable and professional, and the app is easy to use. I've recommended it to all my friends and family."</p>
@@ -106,7 +107,7 @@
             </div>
 
             <div class="flex items-center gap-4 bg-white p-3 max-w-[600px]  shadow-2xl m-3 rounded" data-aos="fade-right" data-aos-duration="1500">
-               <img alt="profile picture" src="#" class=" bg-black min-h-[100px] min-w-[100px] rounded-full"/>
+               <img alt="profile picture" src="/imgs/dps/dp2.jpg" class=" bg-black w-[100px] h-[100px] min-w-[100px] min-h-[100px] object-cover rounded-full"/>
                <div>
                  <p class="font-extrabold">Amy Lee</p>
                  <p>"DrivingKing made learning to drive an enjoyable experience! The instructors are patient and knowledgeable, and the app makes scheduling lessons and tracking progress a breeze. I highly recommend this app to anyone learning to drive."</p>
@@ -114,7 +115,7 @@
             </div>
 
             <div class="flex items-center gap-4 bg-white p-3 max-w-[600px]  shadow-2xl m-3 lg:self-end rounded" data-aos="fade-left" data-aos-duration="1500">
-               <img alt="profile picture" src="#" class=" bg-black min-h-[100px] min-w-[100px] rounded-full"/>
+               <img alt="profile picture" src="/imgs/dps/dp3.jpg" class=" bg-black w-[100px] h-[100px] min-w-[100px] min-h-[100px] object-cover rounded-full"/>
                <div>
                  <p class="font-extrabold">David Johnson</p>
                  <p>"I was hesitant to try DrivingKing, but I'm so glad I did! The app has exceeded my expectations, and I've learned so much from my instructor. The lessons are well-structured and informative, and I feel confident behind the wheel now."</p>

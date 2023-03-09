@@ -7,6 +7,12 @@ function searchForDriversInArea(location){
 
         router.get('/driving-instructors?query='+location.id);
     }
+
+
+
+function numRan(){
+    return Math.floor(Math.random() * 3) + 1;
+}
 </script>
 
 <template>
@@ -26,7 +32,9 @@ function searchForDriversInArea(location){
               <template v-for="instructor in $page.props.driving_instructors">
                 <div class=" rounded p-4 bg-white shadow-xl">
                   <div class="flex items-center gap-4">
-                    <img src="#" class="w-[60px] h-[60px] p-3 rounded-full bg-black" />
+                    
+                    <img :src="'/imgs/dps/dp' + numRan() + '.jpg'" class=" bg-black w-[100px] h-[100px] min-w-[100px] min-h-[100px] object-cover rounded-full" />
+                    
                     <p><strong>Name:</strong> {{instructor.name}}</p>
                   </div>
                   <Link type="button" :href="'/create-booking/' + instructor.id" class="bg-yellow-500 p-3 m-auto block max-w-[100px] rounded hover:bg-black hover:text-white">Book Now</Link>

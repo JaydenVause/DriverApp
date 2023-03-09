@@ -152,14 +152,13 @@ const calendarOptions = {
 		        <div class="max-h-[400px] overflow-auto">
 		          <template v-if="availableBookingTimes.value && availableBookingTimes.value.length > 0">
 		            <template v-for="booking in availableBookingTimes.value">
-		              <button :disabled="Object.keys(bookingTimesSelected.dates).length < 1 || bookingTimesSelected.dates[booking] ? false : true" @click="onAddBooking(booking)" class="bg-gray-100 hover:bg-gray-200 p-3 w-full rounded-lg mb-2">
+		              <button :disabled="Object.keys(bookingTimesSelected.dates).length < 1 || bookingTimesSelected.dates[booking] ? false : true" @click="onAddBooking(booking)" :class="Object.keys(bookingTimesSelected.dates).length < 1 || bookingTimesSelected.dates[booking] ? 'bg-yellow-400 hover:bg-yellow-300 p-3 w-full rounded-lg mb-2' :'bg-gray-100 hover:bg-gray-200 p-3 w-full rounded-lg mb-2'">
 		                <div class="flex justify-between items-center">
 		                  <div>{{formattedDate(booking)}}</div>
 		                  <div v-if="bookingTimesSelected.dates[booking]" class="text-yellow-400 font-bold">Selected</div>
 		                </div>
 		              </button>
 		            </template>
-		            
 		          </template>
 		          <p class="p-3" v-else>No times available...</p>
 		        </div>

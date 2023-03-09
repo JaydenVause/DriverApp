@@ -13,6 +13,7 @@ use App\Models\DrivingInstructorLocationData;
 class DrivingInstructorTest extends TestCase
 {
     use RefreshDatabase;
+    
     /**
      * Tests instructor can add areas they offer lessons to
      */

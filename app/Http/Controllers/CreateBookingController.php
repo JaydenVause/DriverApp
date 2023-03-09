@@ -32,12 +32,16 @@ class CreateBookingController extends Controller
         DrivingLesson::create([
             'user_id' => $user->id,
             'instructor_id' => $instructor->id,
-            'lesson_datetime' => $datetime_start->format('Y-m-d h:i'),
-            'finish_datetime' => $datetime_finish->format('Y-m-d h:i')
+            'lesson_datetime' => $datetime_start->format('Y-m-d H:i'),
+            'finish_datetime' => $datetime_finish->format('Y-m-d H:i')
         ]);
     
 
-        return to_route('dashboard');
+        return to_route('dashboard', [
+            'messages' => [
+                'main' => 'Booking completed!'
+            ],
+        ]);
     }
 
     public function index($instructor_id){
@@ -175,13 +179,13 @@ class CreateBookingController extends Controller
         $driving_finishes = $driving_availablity->{$day.'_to'};
 
         // convert the datetime string to a DateTime object in UTC timezone
-        $date = new DateTime($validated['datetime'], new DateTimeZone('UTC'));
+        $date = new DateTime($validated['datetime']);
         
         
 
         // create a DateTime object for the same date as the input datetime string and with the time set to the value of $driving_starts
-        $appointment_start = new DateTime($date->format('Y-m-d') . ' ' . $driving_starts, new DateTimeZone('UTC'));
-        $appointment_end = new DateTime($date->format('Y-m-d') . ' ' . $driving_finishes, new DateTimeZone('UTC'));
+        $appointment_start = new DateTime($date->format('Y-m-d') . ' ' . $driving_starts);
+        $appointment_end = new DateTime($date->format('Y-m-d') . ' ' . $driving_finishes);
 
         
         // create an empty array to store available appointment times
@@ -198,15 +202,15 @@ class CreateBookingController extends Controller
                 $conflicting_appointments = $driving_instructor
                 ->drivingLessons()
                 ->where('lesson_datetime', '=', $appointment_start->format('Y-m-d h:i:s')) #check booking isnt made for when date made
-                ->orWhere('lesson_datetime',  '=', $shallow_copy->modify('+30 minutes')->format('Y-m-d h:i:s')) #check booking isnt made for 30 minute after date
-                ->orWhere('lesson_datetime',  '=', $shallow_copy->modify('-60 minutes')->format('Y-m-d h:i:s')) #check booking isnt made for 30 minutes before
+                ->orWhere('lesson_datetime',  '=', $shallow_copy->modify('+30 minutes')->format('Y-m-d H:i:s')) #check booking isnt made for 30 minute after date
+                ->orWhere('lesson_datetime',  '=', $shallow_copy->modify('-60 minutes')->format('Y-m-d H:i:s')) #check booking isnt made for 30 minutes before
                 ->get();
 
                 
 
                 if(! count($conflicting_appointments) > 0){
                     // if the appointment time is available, add it to the array
-                    $available_times[] = $appointment_start->format('Y-m-d h:i:s');    
+                    $available_times[] = $appointment_start->format('Y-m-d H:i:s');    
                 }
 
                 

@@ -16,6 +16,9 @@ class UserBookDrivingInstructorTest extends TestCase
 
     use RefreshDatabase;
 
+    /**
+     * tests a user can make a booking with an available driving instructor
+     */
     public function test_user_can_book_instructor(){
         $user = User::factory()->create();
         $instructor = User::factory()->driving_instructor()->has(DayTimeDrivingDrivingInstructor::factory())->create();
@@ -41,7 +44,9 @@ class UserBookDrivingInstructorTest extends TestCase
         ]);
     }
 
-
+    /**
+     * tests a user can get available booking dates that driving instructor has not booked all timeslots
+     */
     public function test_user_can_get_dates_available_booking_times(){
         $driving_instructor = User::factory()->driving_instructor()->has(DayTimeDrivingDrivingInstructor::factory())->create();
         //mon tue fri available
@@ -72,6 +77,9 @@ class UserBookDrivingInstructorTest extends TestCase
         ]);
     }
 
+    /**
+     * tests user can get driving instructors available booking times
+     */
     public function test_user_can_get_booking_times(){
         $driving_instructor = User::factory()->driving_instructor()->has(DayTimeDrivingDrivingInstructor::factory())->create();
 
@@ -79,17 +87,18 @@ class UserBookDrivingInstructorTest extends TestCase
 
         $driving_lesson = DrivingLesson::factory()->for($driving_instructor, 'driving_instructor')->count(2)->create();
 
-         // 2023-02-27T13:00:00.000Z tue 27 march
+        # set date that we want available booking time for
         $data = [
             'day' => 2,
             'datetime' => '2023-02-27T13:00:00.000Z'
         ];
 
+        #make request to get booking for
         $response = $this->actingAs($user)->post('/create-booking/'.$driving_instructor->id.'/get-available-booking-times', $data);
 
         $response->assertStatus(200);
         
-        // is available from 8am-12:30pm
+        #assert available booking times
         $response->assertJson([
             'available_booking_times' => [
                 '2023-02-27 09:30:00',
@@ -99,9 +108,6 @@ class UserBookDrivingInstructorTest extends TestCase
                 '2023-02-27 11:30:00',
             ] 
         ]);
-
-        // 'lesson_datetime' => '2023-02-27T08:30:00',
-        //     'finish_datetime' => '2023-02-27T09:30:00'
     }
 
     /**

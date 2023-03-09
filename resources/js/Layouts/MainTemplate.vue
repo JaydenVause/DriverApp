@@ -4,12 +4,21 @@
 	import Header from '@/Components/Header.vue';
 	import Footer from '@/Components/Footer.vue';
 
+
+	function close_message(page){
+		page.props.messages.main = null
+	}
+
 </script>
 <template>
 	<Header />
 		<div class="pt-[70px] min-h-[80vh] bg-yellow-400">
 			<slot name="super" />
 			<div  class=" m-auto bg-yellow-400 " >
+				<div v-if="$page.props.messages.main" class="alert bg-green-400 text-green-900 p-4 max-w-[1200px] m-auto my-3 rounded">
+			        {{ $page.props.messages.main }}
+			        <button class="float-right" @click="close_message($page)">x</button>
+			    </div>
 				<slot/>
 			</div>
 		</div>

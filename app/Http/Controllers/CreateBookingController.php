@@ -36,12 +36,8 @@ class CreateBookingController extends Controller
             'finish_datetime' => $datetime_finish->format('Y-m-d H:i')
         ]);
     
-
-        return to_route('dashboard', [
-            'messages' => [
-                'main' => 'Booking completed!'
-            ],
-        ]);
+        $request->session()->flash('flash.success', "Your booking was succesful!");
+        return to_route('dashboard');
     }
 
     public function index($instructor_id){
@@ -138,6 +134,7 @@ class CreateBookingController extends Controller
         $validated = $request->validate([
             'day' => ['required', 'integer', 'max:6', 'min:0'],
             'datetime' => 'required|string|max:100',
+            'timezone' => 'required|string|timezone'
         ]);
 
         // get day to determine when driver is opertating
@@ -179,14 +176,22 @@ class CreateBookingController extends Controller
         $driving_finishes = $driving_availablity->{$day.'_to'};
 
         // convert the datetime string to a DateTime object in UTC timezone
-        $date = new DateTime($validated['datetime']);
+        $date = explode('-', explode(' ', $validated['datetime'])[0]);
+        $driving_starts = explode(':', $driving_starts);
+        $driving_finishes = explode(':', $driving_finishes);
         
-        
-
+        $user_timezone = new DateTimeZone($validated['timezone']);
         // create a DateTime object for the same date as the input datetime string and with the time set to the value of $driving_starts
-        $appointment_start = new DateTime($date->format('Y-m-d') . ' ' . $driving_starts);
-        $appointment_end = new DateTime($date->format('Y-m-d') . ' ' . $driving_finishes);
+        
+        $appointment_start = new DateTime();
+        $appointment_start->setTimezone($user_timezone);
+        $appointment_start->setDate($year=$date[0], $month=$date[1], $day=$date[2]);
+        $appointment_start->setTime($hour=$driving_starts[0], $minute=$driving_starts[1]);
 
+        $appointment_end = new DateTime(); 
+        $appointment_end->setTimezone($user_timezone);
+        $appointment_end->setDate($year=$date[0], $month=$date[1], $day=$date[2]);
+        $appointment_end->setTime($hour=$driving_finishes[0], $minute=$driving_finishes[1]);
         
         // create an empty array to store available appointment times
         $available_times = array();
@@ -196,6 +201,19 @@ class CreateBookingController extends Controller
 
         // loop over half-hour intervals until we reach the driving finish time
         while ($appointment_start < $appointment_end) {
+                $user_datetime = new DateTime();
+                $user_datetime->setTimezone($user_timezone);
+
+                // return [
+                //     'available_booking_times' => [
+                //         $appointment_start, $appointment_end, $user_datetime
+                //     ]
+                // ];
+
+                if($appointment_start < $user_datetime){
+                    $appointment_start->modify('+30 minutes');
+                    continue;
+                }
             // check if the appointment time is available
                 $shallow_copy = clone $appointment_start;
 

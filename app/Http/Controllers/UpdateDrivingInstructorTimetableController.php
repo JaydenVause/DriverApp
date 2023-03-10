@@ -110,5 +110,7 @@ class UpdateDrivingInstructorTimetableController extends Controller
                 'location_data_id' => $area['id'],
             ]);
         }
+
+        $request->session()->flash('flash.success', 'You have succesfully updated your instructor profile!');
     }
 }

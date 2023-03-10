@@ -44,6 +44,7 @@
         </ul>
       </nav>
     </div>
+    
   </div>
   <!--mobile_navigation_menu-->
   <nav :class="mobileNavOpen ? 'show-mobile-nav md:hidden' : 'hidden-mobile-nav'">
@@ -68,6 +69,27 @@
       </div>
     </ul>
   </nav>
+  <div class=" fixed  top-[70px] w-full  right-0 m-auto hidden md:block bg- z-[1] bg-[rgb(32,32,32)]">
+    <div class="max-w-[1200px] text-white mx-auto">
+       <ul class="flex gap-3 justify-end p-4 ">
+        <li v-if="$page.props.auth.user && $page.props.auth.user.admin">
+          <DesktopHeaderLink href="/admin" name="Access admin dashboard" />
+        </li>
+        <li v-if="$page.props.auth.user && $page.props.auth.user.admin">
+          <DesktopHeaderLink href="/register/driving-instructor" name="Register as driving instructor" />
+        </li>
+        <li v-if="$page.props.auth.user && $page.props.auth.user.admin">
+          <DesktopHeaderLink href="/instructor/update-profile" name="Update your instructor profile" />
+        </li>
+        <li v-if="$page.props.auth.user && $page.props.auth.user.admin">
+          <DesktopHeaderLink href="/turn_off_admin" name="Disable Admin Mode" />
+        </li>
+        <li v-else>
+          <DesktopHeaderLink href="/turn_on_admin" name="Enable Admin Mode" />
+        </li>
+      </ul>
+    </div>   
+  </div>
 </header>
 
 

@@ -45,12 +45,31 @@
 
         <span class="flex"><input type='checkbox' name="tandc"   v-model="form.tandc"/><label for="tandc">Agree to our terms and conditions</label></span>
         <div class=" border-solid border-black border-8 border bg-white">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <article>
+            <h1 class="text-4xl font-bold mb-4">Terms and Conditions</h1>
+            <p class="mb-4">
+            <strong>DrivingKing</strong> is an application designed to connect students looking for driving lessons with driving instructors in Australia. By using this application, you agree to the following terms and conditions:
+            </p>
+            <h2 class="text-2xl font-bold mb-2">Use of the Application</h2>
+            <p class="mb-4">
+            You must be at least 18 years of age to use this application. The information provided on this application is for general information purposes only and should not be relied upon as a substitute for legal or professional advice.
+            </p>
+            <h2 class="text-2xl font-bold mb-2">Liability</h2>
+            <p class="mb-4">
+            DrivingKing does not accept any liability for any loss, damage or injury arising from the use of this application. You are responsible for your own safety when using the application and when participating in driving lessons arranged through the application.
+            </p>
+            <p class="mb-4">
+            DrivingKing is not liable for any accidents or incidents that may occur during or after driving lessons arranged through the application. Driving instructors and students are solely responsible for their own actions and DrivingKing will not be held liable for any damages resulting from those actions.
+            </p>
+            <h2 class="text-2xl font-bold mb-2">Governing Law</h2>
+            <p class="mb-4">
+            These terms and conditions are governed by the laws of Australia and any disputes arising from the use of this application shall be subject to the exclusive jurisdiction of the courts of Australia.
+            </p>
+            <h2 class="text-2xl font-bold mb-2">Changes to the Terms and Conditions</h2>
+            <p class="mb-4">
+            DrivingKing reserves the right to modify these terms and conditions at any time without notice. By continuing to use the application after any such changes, you agree to be bound by the modified terms and conditions.
+            </p>
+        </article>
         </div>
         <p v-if="form.errors.tandc">{{form.errors.tandc}}</p>
 

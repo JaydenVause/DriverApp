@@ -54,5 +54,7 @@ class ApproveInstructorsController extends Controller
         $registration->save();
 
         $user->save();
+
+        $request->session()->flash('flash.success', "User $user->id registration id $registration->id has been approved!");
     }
 }

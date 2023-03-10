@@ -14,6 +14,7 @@ use App\Http\Controllers\SearchLocationDataController;
 use App\Http\Controllers\SearchForDrivingInstructorsController;
 use App\Http\Controllers\ToggleAdminController;
 use App\Http\Controllers\CreateBookingController;
+use App\Http\Controllers\BrowseLessonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +54,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::post('/create-booking/{instructor_id}/get-available-booking-times', [CreateBookingController::class, 'getAvailableBookingTimes']);
     Route::post('/create-booking/{instructor_id}/get-days-with-timeslot', [CreateBookingController::class, 'getDaysWithTimeslot']);
     Route::post('/create-booking/{instructor_id}/process', [CreateBookingController::class, 'process_booking']);
-    Route::get('/lessons', [BrowseLessonsController::class, 'index']);
+    Route::get('/lessons', [BrowseLessonController::class, 'index']);
 });
 
  Route::get('/search/location-data', [SearchLocationDataController::class, 'search']);

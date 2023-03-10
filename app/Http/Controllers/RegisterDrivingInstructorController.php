@@ -63,6 +63,9 @@ class RegisterDrivingInstructorController extends Controller
 
         Storage::put('medicals', $medical_file);
 
-        return Inertia::render('DrivingInstructor/Success')->with('success', 'Registration successful!');
+
+        $request->session()->flash('flash.success', "Successfully registered as driving instructor");
+
+        return Inertia::render('DrivingInstructor/Success');
     }
 }

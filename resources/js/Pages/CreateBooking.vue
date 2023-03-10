@@ -33,6 +33,7 @@ function onDateClick(date) {
     const form = {
       day: dayOfWeek,
       datetime: date.dateStr,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     };
     axios({
       method: 'post',

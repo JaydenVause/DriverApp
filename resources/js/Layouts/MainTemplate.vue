@@ -6,19 +6,21 @@
 
 
 	function close_message(page){
-		page.props.messages.main = null
+		page.props.message.success = null
 	}
 
 </script>
 <template>
 	<Header />
-		<div class="pt-[70px] min-h-[80vh] bg-yellow-400">
+		<div class="pt-[70px] md:pt-[125px] min-h-[80vh] bg-yellow-400">
 			<slot name="super" />
 			<div  class=" m-auto bg-yellow-400 " >
-				<div v-if="$page.props.messages.main" class="alert bg-green-400 text-green-900 p-4 max-w-[1200px] m-auto my-3 rounded">
-			        {{ $page.props.messages.main }}
-			        <button class="float-right" @click="close_message($page)">x</button>
-			    </div>
+				<div class="w-full flex flex-col items-center">
+					<div v-if="$page.props.message.success" class="alert bg-green-400 text-green-900 p-4 max-w-[1175px] mx-3 my-3 rounded w-full">
+				        {{ $page.props.message.success }}
+				        <button class="float-right" @click="close_message($page)">x</button>
+				    </div>
+				</div>
 				<slot/>
 			</div>
 		</div>

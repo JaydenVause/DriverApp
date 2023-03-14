@@ -17,9 +17,9 @@
     <Head title="Welcome" />
     <MainTemplate>
       <template #super>
-        <div class="bg-[rgb(32,32,32)] " id="locationAnchor">
+        <div class="" id="locationAnchor">
           <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-            <div class="lg:flex lg:items-center lg:justify-between">
+            <div class="lg:flex lg:items-center lg:justify-between bg-[rgba(0,0,0,.5)] p-10 min-h-[300px]">
               <div>
                 <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
                   Find Your Perfect Driving Instructor
@@ -144,6 +144,14 @@
 </template>
 
 <style>
+
+    #locationAnchor{
+      background-image: url('https://images.pexels.com/photos/5647585/pexels-photo-5647585.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+      
+      background-size: cover;
+      background-repeat: no-repeat;
+
+    }
     .dark-gradient{
          background: rgb(32,32,32);
         background: linear-gradient(120deg, rgba(32,32,32,1) 0%, rgba(71,71,69,1) 100%); 

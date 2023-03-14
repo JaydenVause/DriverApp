@@ -12,7 +12,7 @@
 </script>
 <template>
 	<Header />
-		<div class="pt-[70px] md:pt-[125px] min-h-[80vh] bg-yellow-400">
+		<div class="pt-[70px] min-h-[80vh] bg-yellow-400">
 			<slot name="super" />
 			<div  class=" m-auto bg-yellow-400 " >
 				<div class="w-full flex flex-col items-center">

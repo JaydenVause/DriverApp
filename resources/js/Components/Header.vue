@@ -69,7 +69,7 @@
       </div>
     </ul>
   </nav>
-  <div class=" fixed  top-[70px] w-full  right-0 m-auto hidden md:block bg- z-[1] bg-[rgb(32,32,32)]" v-if="$page.props.auth.user.admin">
+  <div class=" fixed  top-[70px] w-full  right-0 m-auto hidden md:block bg- z-[1] bg-[rgb(32,32,32)]" v-if="$page.props.auth.user">
     <div class="max-w-[1200px] text-white mx-auto">
        <ul class="flex gap-3 justify-end p-4 ">
         <li v-if="$page.props.auth.user && $page.props.auth.user.admin">
